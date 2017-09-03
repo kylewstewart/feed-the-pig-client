@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
-import Logo from '../components/Logo';
+import Styles from '../styles/LogInScreenStyles';
+import FullLogo from '../components/FullLogo';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'lightgrey',
-  },
-  logoContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-});
 
 class LogInScreen extends Component {
   static navigationOptions = {
@@ -21,10 +12,8 @@ class LogInScreen extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.logoContainer}>
-          <Logo />
-        </View>
+      <View style={Styles.container}>
+        <FullLogo />
       </View>
     );
   }
