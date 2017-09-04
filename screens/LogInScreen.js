@@ -13,7 +13,11 @@ class LogInScreen extends Component {
   render() {
     return (
       <View style={Styles.container}>
-        <FullLogo />
+        <View style={Styles.columnOne} />
+        <View style={Styles.columnTwo}>
+          <FullLogo />
+        </View>
+        <View style={Styles.columnThree} />
       </View>
     );
   }
