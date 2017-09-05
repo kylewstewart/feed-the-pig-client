@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const FullLogoStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
   },
   logo: {
     flex: 1,

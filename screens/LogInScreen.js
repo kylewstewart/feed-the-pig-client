@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 import Styles from '../styles/LogInScreenStyles';
 import FullLogo from '../components/FullLogo';
-
+import MobileInput from '../components/MobileInput';
 
 class LogInScreen extends Component {
   static navigationOptions = {
@@ -17,7 +17,10 @@ class LogInScreen extends Component {
         <View style={Styles.columnTwo}>
           <FullLogo />
         </View>
-        <View style={Styles.columnThree} />
+        <View style={Styles.columnThree}>
+          <MobileInput />
+        </View>
+        <View style={Styles.columnFour} />
       </View>
     );
   }
