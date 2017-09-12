@@ -1,7 +1,10 @@
+import { MOBILE_INPUT_CHANGED } from '../actions/types';
+
 export default (state = null, action) => {
   switch (action.type) {
-    case 'save_mobile':
-      return action.payload;
+    case MOBILE_INPUT_CHANGED: {
+      return action.payload.replace(/[^0-9.]+/g, '');
+    }
     default:
       return state;
   }

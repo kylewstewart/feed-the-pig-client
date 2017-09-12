@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 const MobileInputStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'space-around',
   },
@@ -13,13 +12,17 @@ const MobileInputStyles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
-  textDone: {
+  label: {
     fontSize: 18,
     fontWeight: 'bold',
   },
-  textUnDone: {
-    fontSize: 15,
-    fontWeight: 'normal',
+  button: {
+    borderWidth: 1,
+    padding: 10,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: '600',
   },
 });
 

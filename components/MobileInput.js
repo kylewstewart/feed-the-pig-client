@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { TextInput, View, Text } from 'react-native';
+import PropTypes from 'prop-types';
+import { TextInput, View, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { mobileInputChanged } from '../actions';
 
 import Styles from '../styles/MobileInputStyles';
 
 class MobileInput extends Component {
-  state= {
-    displayMobile: '',
-    mobile: '',
-    textOne: true,
-  }
 
-  getDisplayMobile = (mobile) => {
-    const displayMobile = mobile.split('');
+  onPress = () => console.log('pressed');
+
+  handleChangedText = text => this.props.mobileInputChanged(text);
+
+  displayMobile = () => {
+    const displayMobile = this.props.mobile.split('');
     if (displayMobile.length === 0) { displayMobile.slice(0, 0, ''); }
     if (displayMobile.length > 0) { displayMobile.splice(0, 0, '('); }
     if (displayMobile.length > 4) { displayMobile.splice(4, 0, ') '); }
@@ -19,37 +21,40 @@ class MobileInput extends Component {
     return displayMobile.join('');
   }
 
-  handleChangedText = (text) => {
-    const mobile = text.replace(/[^0-9.]+/g, '');
-    const displayMobile = this.getDisplayMobile(mobile);
-    this.setState({ mobile });
-    this.setState({ displayMobile });
-  }
-
   render() {
     return (
       <View style={Styles.container}>
-        <Text style={this.state.textOne ? Styles.textDone : Styles.textUndone}>
+        <Text style={Styles.label}>
           Enter your mobile and get a code
         </Text>
         <TextInput
           placeholder="(XXX) XXX-XXXX"
           keyboardType="phone-pad"
           style={Styles.inputField}
-          onChangeText={text => this.handleChangedText(text)}
-          value={this.state.displayMobile}
+          onChangeText={this.handleChangedText}
+          value={this.props.mobile ? this.displayMobile() : null}
           textAlign="center"
           returnKeyType="send"
         />
-        <Text style={this.state.textOne ? Styles.textDone : Styles.textUndone}>
-          Enter your code
-        </Text>
-        <Text style={this.state.textOne ? Styles.textDone : Styles.textUndone}>
-          LogIn
-        </Text>
+        <TouchableOpacity onPress={this.onPress} style={Styles.button}>
+          <Text style={Styles.buttonText}>
+            Submit
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
-export default MobileInput;
+MobileInput.propTypes = {
+  mobile: PropTypes.string,
+  mobileInputChanged: PropTypes.func.isRequired,
+};
+
+MobileInput.defaultProps = {
+  mobile: null,
+};
+
+const mapStateToProps = state => ({ mobile: state.mobile });
+
+export default connect(mapStateToProps, { mobileInputChanged })(MobileInput);

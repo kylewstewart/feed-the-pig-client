@@ -15,7 +15,7 @@ const LogInScreenStyles = StyleSheet.create({
     flex: 1,
   },
   columnThree: {
-    flex: 1,
+    flex: 2,
   },
   columnFour: {
     flex: 2,
