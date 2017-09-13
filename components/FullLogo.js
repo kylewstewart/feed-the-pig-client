@@ -8,7 +8,7 @@ function FullLogo() {
     <View style={Styles.container}>
       <Image
         style={Styles.logo}
-        source={require('../assets/logos/fullLogo.png')}
+        source={require('../assets/logos/logo.png')}
         resizeMode="contain"
       />
     </View>
