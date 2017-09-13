@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import Styles from '../styles/LogInScreenStyles';
+import Styles from '../styles/MobileInputScreenStyles';
 import FullLogo from '../components/FullLogo';
 import MobileInput from '../components/MobileInput';
 
-class LogInScreen extends Component {
+class MobileInputScreen extends Component {
   static navigationOptions = {
-    header: null,
+    title: 'Feed Me Your Mobile',
   };
 
   render() {
@@ -26,4 +26,4 @@ class LogInScreen extends Component {
   }
 }
 
-export default LogInScreen;
+export default MobileInputScreen;

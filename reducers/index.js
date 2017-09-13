@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import MobileReducer from './MobileReducer';
+import mobile from './MobileReducer';
+import nav from './NavigationReducer';
 
 export default combineReducers({
-  mobile: MobileReducer,
+  mobile,
+  nav,
 });

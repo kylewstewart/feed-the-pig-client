@@ -1,25 +1,35 @@
 import React from 'react';
 import { View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import { applyMiddleware, createStore } from 'redux';
+import { Provider, connect } from 'react-redux';
+import { addNavigationHelpers } from 'react-navigation';
+
 import reducers from './reducers';
-import LogInScreen from './screens/LogInScreen';
-import CreateAcctScreen from './screens/CreateAcctScreen';
+import RootNavigation from './navigation/RootNavigation';
 
-const MainNavigator = StackNavigator({
-  LogIn: { screen: LogInScreen },
-  createAcct: { screen: CreateAcctScreen },
-});
+const store = createStore(
+  reducers,
+  applyMiddleware(logger),
+);
 
-function App() {
-  return (
-    <Provider store={createStore(reducers)}>
-      <View style={{ flex: 1 }}>
-        <MainNavigator />
-      </View>
-    </Provider>
-  );
-}
+const App = ({ dispatch, nav }) => (
+  <RootNavigation
+    navigation={addNavigationHelpers({
+      dispatch,
+      state: nav,
+    })}
+  />
+);
 
-export default App;
+const mapStateToProps = state => ({ nav: state.nav });
+
+const AppWithNavigation = connect(mapStateToProps)(App);
+
+export default () => (
+  <Provider store={store}>
+    <View style={{ flex: 1 }}>
+      <AppWithNavigation />
+    </View>
+  </Provider>
+);

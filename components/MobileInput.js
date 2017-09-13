@@ -8,7 +8,7 @@ import Styles from '../styles/MobileInputStyles';
 
 class MobileInput extends Component {
 
-  onPress = () => console.log('pressed');
+  onPress = () => console.log(this.props.mobile);
 
   handleChangedText = text => this.props.mobileInputChanged(text);
 
@@ -25,7 +25,7 @@ class MobileInput extends Component {
     return (
       <View style={Styles.container}>
         <Text style={Styles.label}>
-          Enter your mobile and get a code
+          enter your mobile
         </Text>
         <TextInput
           placeholder="(XXX) XXX-XXXX"
@@ -38,7 +38,7 @@ class MobileInput extends Component {
         />
         <TouchableOpacity onPress={this.onPress} style={Styles.button}>
           <Text style={Styles.buttonText}>
-            Submit
+            get code
           </Text>
         </TouchableOpacity>
       </View>

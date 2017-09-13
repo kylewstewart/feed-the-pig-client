@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 
-const LogInScreenStyles = StyleSheet.create({
+const MobileInputScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: 'white',
     paddingLeft: 10,
     paddingRight: 10,
@@ -22,4 +22,4 @@ const LogInScreenStyles = StyleSheet.create({
   },
 });
 
-export default LogInScreenStyles;
+export default MobileInputScreenStyles;

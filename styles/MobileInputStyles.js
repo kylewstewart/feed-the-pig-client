@@ -18,11 +18,13 @@ const MobileInputStyles = StyleSheet.create({
   },
   button: {
     borderWidth: 1,
+    backgroundColor: 'cornflowerblue',
     padding: 10,
   },
   buttonText: {
     fontSize: 18,
-    fontWeight: '600',
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
