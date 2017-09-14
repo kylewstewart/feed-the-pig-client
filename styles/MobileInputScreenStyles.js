@@ -17,7 +17,7 @@ const MobileInputScreenStyles = StyleSheet.create({
     justifyContent: 'space-around',
   },
   columnThree: {
-    height: '40%',
+    height: '50%',
   },
   inputField: {
     borderColor: 'gray',
@@ -40,7 +40,7 @@ const MobileInputScreenStyles = StyleSheet.create({
     fontFamily: 'Avenir Next',
     fontSize: 20,
     color: '#005A9C',
-    fontWeight: '600',
+    fontWeight: '500',
   },
 });
 

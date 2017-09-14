@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Keyboard, TextInput } from 'react-native';
+import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { mobileInputChanged } from '../actions';
 
 import Styles from '../styles/MobileInputStyles';
 
 class MobileInput extends Component {
-  state = { keyboard: '' };
-
-  handleChangedText = (text) => {
-    console.log(text);
-    const mobile = text.replace(/[^0-9.]+/g, '');
-    console.log(mobile.length);
-    this.props.mobileInputChanged(mobile);
-  }
+  handleChangedText = text => this.props.mobileInputChanged(text);
 
   displayMobile = () => {
     const displayMobile = this.props.mobile.split('');
@@ -28,7 +21,7 @@ class MobileInput extends Component {
   render() {
     return (
       <TextInput
-        placeholder="(XXX) XXX-XXXX"
+        placeholder="(555) 555-5555"
         keyboardType="phone-pad"
         style={Styles.inputField}
         onChangeText={this.handleChangedText}
