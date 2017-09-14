@@ -6,6 +6,11 @@ import { mobileInputChanged } from '../actions';
 
 import Styles from '../styles/MobileInputStyles';
 
+const propTypes = {
+  mobile: PropTypes.string.isRequired,
+  mobileInputChanged: PropTypes.func.isRequired,
+};
+
 class MobileInput extends Component {
   handleChangedText = text => this.props.mobileInputChanged(text);
 
@@ -27,7 +32,6 @@ class MobileInput extends Component {
         onChangeText={this.handleChangedText}
         value={this.props.mobile ? this.displayMobile() : null}
         textAlign="center"
-        returnKeyType="send"
         autoFocus
         pointerEvents="none"
       />
@@ -35,14 +39,7 @@ class MobileInput extends Component {
   }
 }
 
-MobileInput.propTypes = {
-  mobile: PropTypes.string,
-  mobileInputChanged: PropTypes.func.isRequired,
-};
-
-MobileInput.defaultProps = {
-  mobile: null,
-};
+MobileInput.propTypes = propTypes;
 
 const mapStateToProps = state => ({ mobile: state.mobile });
 

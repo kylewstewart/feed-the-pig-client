@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
-import Styles from '../styles/CodeInputStyles';
+import Styles from '../styles/CodeInputStylesScreen';
+import FullLogo from '../components/FullLogo';
+
+// const propTypes = {
+//
+// };
 
 class CreateAcctScreen extends Component {
   static navigationOptions = {
@@ -11,7 +16,10 @@ class CreateAcctScreen extends Component {
 
   render() {
     return (
-      <View>
+      <View style={Styles.screenContainer}>
+        <View style={Styles.columnOne}>
+          <FullLogo />
+        </View>
       </View>
     );
   }
