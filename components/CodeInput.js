@@ -4,6 +4,8 @@ import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
 import Styles from '../styles/CodeInputStyles';
+import { codeInputChanged } from '../actions';
+
 
 const propTypes = {
   code: PropTypes.string.isRequired,
@@ -16,16 +18,19 @@ class CodeInput extends Component {
   render() {
     return (
       <TextInput
-        placeholder="XXXX"
-        keyboardType="numeric"
+        placeholder="XXXXX"
+        keyboardType="default"
         style={Styles.inputField}
         onChangeText={this.handleChangedText}
         value={this.props.code}
         textAlign="center"
+        autoCorrect={false}
         autoFocus
+        autoCapitalize="characters"
         pointerEvents="none"
+        maxLength="5"
       />
-  );
+    );
   }
 }
 

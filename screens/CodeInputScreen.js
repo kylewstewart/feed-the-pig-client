@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 
-import Styles from '../styles/CodeInputStylesScreen';
+import Styles from '../styles/CodeInputScreenStyles';
 import FullLogo from '../components/FullLogo';
-
-// const propTypes = {
-//
-// };
+import CodeInput from '../components/CodeInput';
 
 class CreateAcctScreen extends Component {
   static navigationOptions = {
@@ -20,6 +17,15 @@ class CreateAcctScreen extends Component {
         <View style={Styles.columnOne}>
           <FullLogo />
         </View>
+        <View style={Styles.columnTwo}>
+          <CodeInput />
+          <TouchableOpacity onPress={this.onPress} style={Styles.button}>
+            <Text style={Styles.buttonText}>
+              submit code
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={Styles.columnThree} />
       </View>
     );
   }
