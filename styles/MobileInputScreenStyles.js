@@ -3,27 +3,21 @@ import { StyleSheet } from 'react-native';
 const MobileInputScreenStyles = StyleSheet.create({
   screenContainer: {
     flex: 1,
-    justifyContent: 'space-between',
     backgroundColor: 'white',
     paddingLeft: 10,
     paddingRight: 10,
+    justifyContent: 'space-around',
   },
   columnOne: {
     flex: 1,
   },
   columnTwo: {
     flex: 1,
-  },
-  columnThree: {
-    flex: 1,
-  },
-  columnFour: {
-    flex: 2,
-  },
-  container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'space-around',
+  },
+  columnThree: {
+    height: '40%',
   },
   inputField: {
     borderColor: 'gray',

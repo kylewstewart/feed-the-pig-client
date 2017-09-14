@@ -35,14 +35,12 @@ class MobileInputScreen extends Component {
           <FullLogo />
         </View>
         <View style={Styles.columnTwo}>
-          <View style={Styles.container}>
-            <MobileInput />
-            <TouchableOpacity onPress={this.onPress} style={Styles.button}>
-              <Text style={Styles.buttonText}>
-                get code
-              </Text>
-            </TouchableOpacity>
-          </View>
+          <MobileInput />
+          <TouchableOpacity onPress={this.onPress} style={Styles.button}>
+            <Text style={Styles.buttonText}>
+              get code
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={Styles.columnThree} />
       </View>
