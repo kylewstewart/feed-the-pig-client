@@ -19,7 +19,7 @@ class CodeInput extends Component {
     return (
       <TextInput
         placeholder="XXXXX"
-        keyboardType="default"
+        keyboardType="numeric"
         style={Styles.inputField}
         onChangeText={this.handleChangedText}
         value={this.props.code}
