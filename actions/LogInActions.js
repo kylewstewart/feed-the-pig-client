@@ -1,3 +1,4 @@
+import Adaptors from '../adaptors';
 import {
   MOBILE_INPUT_CHANGED,
   CODE_INPUT_CHANGED,
@@ -16,3 +17,10 @@ export const codeInputChanged = text => (
     payload: text,
   }
 );
+
+export const getCode = (mobile) => {
+  return (dispatch) => {
+    Adaptors.getCode(mobile)
+      .then(response => console.log(response));
+  };
+};
