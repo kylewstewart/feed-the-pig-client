@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { mobileInputChanged } from '../actions';
+import { mobileInput } from '../actions';
 
 import Styles from '../styles/MobileInputStyles';
 
 const propTypes = {
   mobile: PropTypes.string.isRequired,
-  mobileInputChanged: PropTypes.func.isRequired,
+  mobileInput: PropTypes.func.isRequired,
 };
 
 class MobileInput extends Component {
-  handleChangedText = text => this.props.mobileInputChanged(text);
+  handleChangedText = text => this.props.mobileInput(text);
 
   displayMobile = () => {
     const displayMobile = this.props.mobile.split('');
@@ -43,4 +43,4 @@ MobileInput.propTypes = propTypes;
 
 const mapStateToProps = state => ({ mobile: state.mobile });
 
-export default connect(mapStateToProps, { mobileInputChanged })(MobileInput);
+export default connect(mapStateToProps, { mobileInput })(MobileInput);

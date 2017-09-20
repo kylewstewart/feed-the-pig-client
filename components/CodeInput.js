@@ -4,16 +4,16 @@ import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
 import Styles from '../styles/CodeInputStyles';
-import { codeInputChanged } from '../actions';
+import { codeInput } from '../actions';
 
 
 const propTypes = {
   code: PropTypes.string.isRequired,
-  codeInputChanged: PropTypes.func.isRequired,
+  codeInput: PropTypes.func.isRequired,
 };
 
 class CodeInput extends Component {
-  handleChangedText = text => this.props.codeInputChanged(text);
+  handleChangedText = text => this.props.codeInput(text);
 
   render() {
     return (
@@ -28,7 +28,7 @@ class CodeInput extends Component {
         autoFocus
         autoCapitalize="characters"
         pointerEvents="none"
-        maxLength="5"
+        maxLength={5}
       />
     );
   }
@@ -36,6 +36,6 @@ class CodeInput extends Component {
 
 CodeInput.propTypes = propTypes;
 
-const mapStateToProps = state => ({ code: state.code, userId: state.userId });
+const mapStateToProps = state => ({ code: state.code });
 
-export default connect(mapStateToProps, { codeInputChanged })(CodeInput);
+export default connect(mapStateToProps, { codeInput })(CodeInput);
