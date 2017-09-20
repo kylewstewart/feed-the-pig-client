@@ -36,6 +36,6 @@ class CodeInput extends Component {
 
 CodeInput.propTypes = propTypes;
 
-const mapStateToProps = state => ({ code: state.code });
+const mapStateToProps = state => ({ code: state.code, userId: state.userId });
 
 export default connect(mapStateToProps, { codeInputChanged })(CodeInput);
