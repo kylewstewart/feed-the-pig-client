@@ -9,13 +9,20 @@ function headers() {
 }
 
 export default class Adapter {
-
   static getCode(mobile) {
     return fetch(`${url}/users`, {
       method: 'post',
       headers: headers(),
       body: JSON.stringify({ mobile }),
-    }).then(response => response.json())
+    }).then(response => response.json());
+  }
+
+  static auth(userId, code) {
+    return fetch(`${url}/auth`, {
+      method: 'post',
+      headers: headers(),
+      body: JSON.stringify({ userId, code }),
+    }).then(response => response.json());
   }
 
 }

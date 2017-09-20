@@ -21,3 +21,10 @@ export const getCode = (mobile) => {
       });
   };
 };
+
+export const auth = (userId, code) => {
+  return (dispatch) => {
+    Adaptors.auth(userId, code)
+    .then(response => console.log(response))
+  };
+};
