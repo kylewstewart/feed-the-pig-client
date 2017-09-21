@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import Styles from '../styles/CodeInputScreenStyles';
 import FullLogo from '../components/FullLogo';
 import CodeInput from '../components/CodeInput';
-import { auth } from '../actions';
+import { logIn } from '../actions';
 
 const propTypes = {
   code: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired,
-  auth: PropTypes.func.isRequired,
+  logIn: PropTypes.func.isRequired,
 };
 
 class CodeInputScreen extends Component {
@@ -22,7 +22,7 @@ class CodeInputScreen extends Component {
 
   onPress = () => {
     const { userId, code } = this.props;
-    this.props.auth(userId, code);
+    this.props.logIn(userId, code);
   };
 
   render() {
@@ -49,4 +49,4 @@ CodeInputScreen.propTypes = propTypes;
 
 const mapStateToProps = state => ({ code: state.code, userId: state.userId });
 
-export default connect(mapStateToProps, { auth })(CodeInputScreen);
+export default connect(mapStateToProps, { logIn })(CodeInputScreen);

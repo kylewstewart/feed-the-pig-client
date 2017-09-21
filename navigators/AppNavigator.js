@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
+import AuthScreen from '../screens/AuthScreen';
 import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
+import MainScreen from '../screens/MainScreen';
 
 export const AppNavigator = StackNavigator({
+  auth: { screen: AuthScreen },
   mobileInput: { screen: MobileInputScreen },
   codeInput: { screen: CodeInputScreen },
+  main: { screen: MainScreen },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (
@@ -17,7 +21,7 @@ const AppWithNavigationState = ({ dispatch, nav }) => (
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.object.isRequired,
+  nav: PropTypes.shape.isRequired,
 };
 
 const mapStateToProps = state => ({ nav: state.nav });

@@ -1,10 +1,12 @@
+import { AsyncStorage } from 'react-native';
+
 const url = 'http://localhost:3000/api/v1';
 
 function headers() {
   return {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    // 'Authorization': localStorage.getItem('jwt')
+    'Authorization': AsyncStorage.getItem('token'),
   };
 }
 
