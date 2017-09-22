@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import AuthScreen from '../screens/AuthScreen';
+import WelcomeScreen from '../screens/WelcomeScreen';
 import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
 import MainScreen from '../screens/MainScreen';
@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 export const AppNavigator = StackNavigator({
-  auth: { screen: AuthScreen },
+  welcome: { screen: WelcomeScreen },
   mobileInput: { screen: MobileInputScreen },
   codeInput: { screen: CodeInputScreen },
   main: { screen: MainScreen },

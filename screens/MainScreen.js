@@ -1,21 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { logOut } from '../actions',
 
-function MainScreen(props) {
-  return (
-    <View>
-      <Text> Main Screen </Text>
-        <TouchableOpacity onPress={this.onPress} style={Styles.button}>
-          <Text style={Styles.buttonText}>
-            submit code
+import { logOut } from '../actions';
+
+const propTypes = {
+  logOut: PropTypes.func.isRequired,
+};
+
+class MainScreen extends Component {
+  onPress = () => this.props.logOut();
+
+  render() {
+    return (
+      <View>
+        <Text> Main Screen </Text>
+        <TouchableOpacity onPress={this.onPress}>
+          <Text >
+            Log Out
           </Text>
         </TouchableOpacity>
-    </View>
-  );
+      </View>
+    );
+  }
 }
 
-const mapStateToProps = state => ({ userId: state.userId });
+MainScreen.propTypes = propTypes;
+
+const mapStateToProps = state => ({ state });
 
 export default connect(mapStateToProps, { logOut })(MainScreen);

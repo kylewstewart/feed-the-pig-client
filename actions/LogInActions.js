@@ -12,7 +12,7 @@ export const codeInput = text => (
   { type: type.CODE_INPUT, payload: text }
 );
 
-export const logOut = (dispatch) => {
+export const logOut = () => (dispatch) => {
   AsyncStorage.removeItem('token');
   dispatch({ type: type.CLEAR_LOGGED_IN });
   dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
@@ -51,7 +51,6 @@ export const authenticate = () => async (dispatch) => {
   const token = await AsyncStorage.getItem('token');
   if (!token) {
     dispatch({ type: type.CLEAR_LOGGED_IN });
-    dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
   } else {
     dispatch({ type: type.SET_IS_LOADING });
     const response = await Adaptors.currentUser(token);
@@ -59,13 +58,15 @@ export const authenticate = () => async (dispatch) => {
       AsyncStorage.removeItem('token');
       dispatch({ type: type.CLEAR_TOKEN });
       dispatch({ type: type.CLEAR_LOGGED_IN });
-      dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
       dispatch({ type: type.CLEAR_IS_LOADING });
     } else {
       dispatch({ type: type.SET_USER_ID, payload: response.id });
       dispatch({ type: type.SET_LOGGED_IN });
-      dispatch(NavigationActions.navigate({ routeName: 'main' }));
       dispatch({ type: type.CLEAR_IS_LOADING });
     }
   }
 };
+
+// dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
+// dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
+// dispatch(NavigationActions.navigate({ routeName: 'main' }));
