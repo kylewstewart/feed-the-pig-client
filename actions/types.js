@@ -1,6 +1,9 @@
 export const MOBILE_INPUT = 'mobile_input';
 export const CODE_INPUT = 'code_input';
 export const NAV_CHANGE = 'nav_change';
-export const USER_ID = 'set_user_id';
+export const SET_USER_ID = 'set_user_id';
+export const CLEAR_USER_ID = 'clear_user_id';
 export const SET_TOKEN = 'set_token';
 export const CLEAR_TOKEN = 'clear_token';
+export const SET_LOGGED_IN = 'set_logged_in';
+export const CLEAR_LOGGED_IN = 'clear_logged_in';

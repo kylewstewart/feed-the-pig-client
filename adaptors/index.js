@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const url = 'http://localhost:3000/api/v1';
+const baseURL = 'http://localhost:3000/api/v1';
 
 function headers() {
   return {
@@ -12,7 +12,7 @@ function headers() {
 
 export default class Adapter {
   static getCode(mobile) {
-    return fetch(`${url}/users`, {
+    return fetch(`${baseURL}/users`, {
       method: 'post',
       headers: headers(),
       body: JSON.stringify({ mobile }),
@@ -20,10 +20,16 @@ export default class Adapter {
   }
 
   static auth(userId, code) {
-    return fetch(`${url}/auth`, {
+    return fetch(`${baseURL}/auth`, {
       method: 'post',
       headers: headers(),
       body: JSON.stringify({ userId, code }),
+    }).then(response => response.json());
+  }
+
+  static currentUser() {
+    return fetch(`${baseURL}/current_user`, {
+      headers: headers(),
     }).then(response => response.json());
   }
 

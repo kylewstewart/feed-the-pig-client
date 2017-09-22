@@ -1,11 +1,13 @@
 import { AsyncStorage } from 'react-native';
+import { NavigationActions } from 'react-navigation';
+
 import Adaptors from '../adaptors';
 import {
   MOBILE_INPUT,
   CODE_INPUT,
-  USER_ID,
+  SET_USER_ID,
   SET_TOKEN,
-  NAV_CHANGE,
+  CLEAR_TOKEN,
 } from './types';
 
 export const mobileInput = text => (
@@ -16,25 +18,43 @@ export const codeInput = text => (
   { type: CODE_INPUT, payload: text }
 );
 
-export const getCode = mobile => (dispatch) => {
-  Adaptors.getCode(mobile)
-    .then(user => dispatch({ type: USER_ID, payload: user.id }));
+export const getCode = mobile => async (dispatch) => {
+  const { id } = await Adaptors.getCode(mobile);
+  dispatch({ type: SET_USER_ID, payload: id });
 };
 
-const authPayload = () => 'mobile';
-// const authPayload = async () => {
-//   const { token } = await AsyncStorage.getItem('auth');
-//   return token ? 'main' : 'mobile';
-// };
+export const setUserID = id => (
+  { type: SET_USER_ID, payload: id }
+);
 
-export const authenticate = () => {
-  const screen = authPayload();
-  return { type: NAV_CHANGE, payload: screen };
+export const setToken = token => async (dispatch) => {
+  await AsyncStorage.setItem('token', token);
+  dispatch({ type: SET_TOKEN, payload: token });
 };
 
-// export const login = (userId, code) => async (dispatch) => {
-//   const { jwt } = await Adaptors.auth(userId, code);
-//   const authProps = { token: jwt, userId };
-//   console.log(authProps);
-  // await AsyncStorage.setItem('auth', authProps);
+export const clearToken = () => async (dispatch) => {
+  await AsyncStorage.clear('token');
+  dispatch({ type: CLEAR_TOKEN });
+};
+
+export const logIn = (userId, code) => async (dispatch) => {
+  const { token } = await Adaptors.auth(userId, code);
+  console.log(token);
+  // await AsyncStorage.setItem('token', token);
+  dispatch({ type: SET_TOKEN, payload: token });
+};
+
+// const userId = await Adaptors.currentUser(token);
+// dispatch({ type: SET_USER_ID, payload: userId });
+// dispatch({ type: SET_TOKEN, payload: token });
+// export const authenticate = async (dispatch) => {
+//   const token = await AsyncStorage.getItem('token');
+//   console.log('token', token);
+// if (token) {
+//   console.log('route main');
+//   dispatch(NavigationActions.navigate({ routeName: 'main' }));
+// } else {
+//   console.log('route mobileInput');
+//   dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
+// }
 // };

@@ -10,7 +10,6 @@ import { logIn } from '../actions';
 
 const propTypes = {
   code: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
   logIn: PropTypes.func.isRequired,
 };
 
