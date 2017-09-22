@@ -1,32 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import { Adaptors } from '../adaptors';
-import {} from '../actions';
+import { authenticate, clearToken } from '../actions';
 
 const propTypes = {
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  authenticate: PropTypes.func.isRequired,
 };
 
 class AuthScreen extends Component {
   componentDidMount = async () => {
-    const token = await AsyncStorage.getItem('token');
-    if (token) {
-      const userId = await Adaptors.currentUser(token);
-      console.log(userId);
-    }
-    if (token) {
+    await this.props.authenticate();
+    if (this.props.loggedIn) {
       this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'main' }));
-      console.log('true', token);
     } else {
       this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
-      console.log('false', token);
     }
-    // if (token) {
-    // } else {
-    // }
   }
 
   render() {
@@ -40,4 +35,6 @@ class AuthScreen extends Component {
 
 AuthScreen.propTypes = propTypes;
 
-export default connect(null, {})(AuthScreen);
+const mapStateToProps = ({ loggedIn }) => ({ loggedIn });
+
+export default connect(mapStateToProps, { authenticate, clearToken })(AuthScreen);

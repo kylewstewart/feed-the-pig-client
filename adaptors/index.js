@@ -1,20 +1,13 @@
-import { AsyncStorage } from 'react-native';
-
 const baseURL = 'http://localhost:3000/api/v1';
-
-function headers() {
-  return {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': AsyncStorage.getItem('token'),
-  };
-}
 
 export default class Adapter {
   static getCode(mobile) {
     return fetch(`${baseURL}/users`, {
       method: 'post',
-      headers: headers(),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
       body: JSON.stringify({ mobile }),
     }).then(response => response.json());
   }
@@ -22,14 +15,21 @@ export default class Adapter {
   static auth(userId, code) {
     return fetch(`${baseURL}/auth`, {
       method: 'post',
-      headers: headers(),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
       body: JSON.stringify({ userId, code }),
     }).then(response => response.json());
   }
 
-  static currentUser() {
+  static currentUser(token) {
     return fetch(`${baseURL}/current_user`, {
-      headers: headers(),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `${token}`,
+      },
     }).then(response => response.json());
   }
 

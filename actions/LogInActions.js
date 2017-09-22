@@ -1,6 +1,4 @@
 import { AsyncStorage } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-
 import Adaptors from '../adaptors';
 import {
   MOBILE_INPUT,
@@ -8,6 +6,8 @@ import {
   SET_USER_ID,
   SET_TOKEN,
   CLEAR_TOKEN,
+  SET_LOGGED_IN,
+  CLEAR_LOGGED_IN,
 } from './types';
 
 export const mobileInput = text => (
@@ -38,23 +38,33 @@ export const clearToken = () => async (dispatch) => {
 };
 
 export const logIn = (userId, code) => async (dispatch) => {
-  const { token } = await Adaptors.auth(userId, code);
-  console.log(token);
-  // await AsyncStorage.setItem('token', token);
-  dispatch({ type: SET_TOKEN, payload: token });
+  const response = await Adaptors.auth(userId, code);
+  if (response.error) {
+    console.log('LogIn Error:', response.error);
+    dispatch({ type: CLEAR_LOGGED_IN });
+  } else {
+    console.log('Logged In');
+    await AsyncStorage.setItem('token', response.token);
+    dispatch({ type: SET_LOGGED_IN });
+    dispatch({ type: SET_TOKEN, payload: response.token });
+  }
 };
 
-// const userId = await Adaptors.currentUser(token);
-// dispatch({ type: SET_USER_ID, payload: userId });
-// dispatch({ type: SET_TOKEN, payload: token });
-// export const authenticate = async (dispatch) => {
-//   const token = await AsyncStorage.getItem('token');
-//   console.log('token', token);
-// if (token) {
-//   console.log('route main');
-//   dispatch(NavigationActions.navigate({ routeName: 'main' }));
-// } else {
-//   console.log('route mobileInput');
-//   dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
-// }
-// };
+export const authenticate = () => async (dispatch) => {
+  const token = await AsyncStorage.getItem('token');
+  if (!token) {
+    console.log('No Token');
+    dispatch({ type: CLEAR_LOGGED_IN });
+  } else {
+    const response = await Adaptors.currentUser(token);
+    if (response.error) {
+      console.log('Token Error', response.error);
+      dispatch({ type: CLEAR_LOGGED_IN });
+      dispatch({ type: CLEAR_TOKEN });
+    } else {
+      console.log('authenticated')
+      dispatch({ type: SET_LOGGED_IN });
+      dispatch({ type: SET_USER_ID, payload: response.id });
+    }
+  }
+};
