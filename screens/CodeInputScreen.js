@@ -11,6 +11,7 @@ import { logIn } from '../actions';
 const propTypes = {
   code: PropTypes.string.isRequired,
   logIn: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
 };
 
 class CodeInputScreen extends Component {
@@ -46,6 +47,6 @@ class CodeInputScreen extends Component {
 
 CodeInputScreen.propTypes = propTypes;
 
-const mapStateToProps = state => ({ code: state.code, userId: state.userId });
+const mapStateToProps = ({ code, userId }) => ({ code, userId });
 
 export default connect(mapStateToProps, { logIn })(CodeInputScreen);

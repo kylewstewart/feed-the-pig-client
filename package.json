@@ -1,5 +1,5 @@
 {
-  "name": "i-want",
+  "name": "feed-the-pig-client",
   "version": "0.0.0",
   "scripts": {
     "react-devtools": "react-devtools"

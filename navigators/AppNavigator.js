@@ -8,6 +8,11 @@ import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
 import MainScreen from '../screens/MainScreen';
 
+const propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  nav: PropTypes.shape({}).isRequired,
+};
+
 export const AppNavigator = StackNavigator({
   auth: { screen: AuthScreen },
   mobileInput: { screen: MobileInputScreen },
@@ -19,10 +24,7 @@ const AppWithNavigationState = ({ dispatch, nav }) => (
   <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
 );
 
-AppWithNavigationState.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  nav: PropTypes.shape.isRequired,
-};
+AppWithNavigationState.propTypes = propTypes;
 
 const mapStateToProps = state => ({ nav: state.nav });
 

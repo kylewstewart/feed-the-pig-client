@@ -7,3 +7,5 @@ export const SET_TOKEN = 'set_token';
 export const CLEAR_TOKEN = 'clear_token';
 export const SET_LOGGED_IN = 'set_logged_in';
 export const CLEAR_LOGGED_IN = 'clear_logged_in';
+export const SET_IS_LOADING = 'set_is_loading';
+export const CLEAR_IS_LOADING = 'clear_is_loading';

@@ -13,7 +13,6 @@ const FullLogoStyles = StyleSheet.create({
     fontSize: 24,
     color: '#005A9C',
     fontWeight: '700',
-
   },
   imageContainer: {
     flex: 1,
