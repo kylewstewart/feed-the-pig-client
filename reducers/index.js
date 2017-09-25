@@ -6,6 +6,7 @@ import userId from './UserIdReducer';
 import loggedIn from './LoggedInReducer';
 import token from './TokenReducer';
 import isLoading from './IsLoadingReducer';
+import error from './ErrorReducer';
 
 export default combineReducers({
   mobile,
@@ -15,4 +16,5 @@ export default combineReducers({
   loggedIn,
   token,
   isLoading,
+  error,
 });

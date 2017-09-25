@@ -17,3 +17,6 @@ export const CLEAR_LOGGED_IN = 'clear_logged_in';
 
 export const SET_IS_LOADING = 'set_is_loading';
 export const CLEAR_IS_LOADING = 'clear_is_loading';
+
+export const SET_ERROR = 'set_error';
+export const CLEAR_ERROR = 'clear_error';

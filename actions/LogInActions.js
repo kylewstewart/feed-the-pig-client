@@ -19,8 +19,15 @@ export const logOut = () => (dispatch) => {
 };
 
 export const getCode = mobile => async (dispatch) => {
-  const { id } = await Adaptors.getCode(mobile);
-  dispatch({ type: type.SET_USER_ID, payload: id });
+  const response = await Adaptors.getCode(mobile);
+  if (response.error) {
+    dispatch({ type: type.SET_ERROR, payload: response.error });
+    dispatch({ type: type.CLEAR_MOBILE });
+  } else {
+    dispatch({ type: type.CLEAR_ERROR });
+    dispatch({ type: type.SET_USER_ID, payload: response.id });
+    dispatch(NavigationActions.navigate({ routeName: 'codeInput' }));
+  }
 };
 
 export const setUserID = id => (

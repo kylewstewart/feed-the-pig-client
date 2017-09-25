@@ -26,7 +26,6 @@ class MobileInputScreen extends Component {
   onPress = () => {
     if (this.props.mobile.length === 10) {
       this.props.getCode(this.props.mobile);
-      this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'codeInput' }));
     }
   }
 
@@ -52,6 +51,6 @@ class MobileInputScreen extends Component {
 
 MobileInputScreen.propTypes = propTypes;
 
-const mapStateToProps = state => ({ mobile: state.mobile });
+const mapStateToProps = ({ mobile, error }) => ({ mobile, error });
 
 export default connect(mapStateToProps, { getCode })(MobileInputScreen);
