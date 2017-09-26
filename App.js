@@ -11,7 +11,7 @@ import AppWithNavigationState from './navigators/AppNavigator';
 const store = createStore(
   reducers,
   {},
-  applyMiddleware(ReduxThunk),
+  applyMiddleware(ReduxThunk, logger),
 );
 
 function App() {

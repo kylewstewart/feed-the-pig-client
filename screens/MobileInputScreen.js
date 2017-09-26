@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { NavigationActions } from 'react-navigation';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -12,9 +11,6 @@ import { getCode } from '../actions';
 const propTypes = {
   mobile: PropTypes.string.isRequired,
   getCode: PropTypes.func.isRequired,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 class MobileInputScreen extends Component {
