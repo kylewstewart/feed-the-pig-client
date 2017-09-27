@@ -1,21 +1,23 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, TouchableOpacity, Text } from 'react-native';
-import { connect } from 'react-redux';
+import React from 'react';
+import { View, Text } from 'react-native';
 
+import styles from '../styles/ErrorScreenStyles';
 import SpinningPig from '../components/SpinningPig';
 
-class ErrorScreen extends Component {
+const text = "i'm not feeling so good, go back and try again";
 
-  render() {
-    return (
-      <View>
-        <SpinningPig />
-      </View>
-    );
-  }
-}
+const ErrorScreen = () => (
+  <View style={styles.screenContainer}>
+    <View style={styles.columnTwo}>
+      <SpinningPig />
+    </View>
+    <View style={styles.columnThree}>
+      <Text style={styles.text}>
+        { text }
+      </Text>
+    </View>
+  </View>
+);
 
-const mapStateToProps = state => ({ state });
 
-export default connect(mapStateToProps)(ErrorScreen);
+export default ErrorScreen;

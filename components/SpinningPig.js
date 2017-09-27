@@ -11,14 +11,14 @@ class SpinningPig extends Component {
   componentDidMount() {
     Animated.timing(this.animatedValue, {
       toValue: 1,
-      duration: 24000,
+      duration: 6400,
     }).start();
   }
 
   render() {
     const interpolateRotation = this.animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: ['0deg', '7200deg'],
+      outputRange: ['0deg', '720deg'],
     });
 
     const animatedStyle = {

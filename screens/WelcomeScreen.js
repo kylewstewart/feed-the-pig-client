@@ -2,18 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 
 import style from '../styles/WelcomeScreenStyles';
-import { authenticate } from '../actions';
+import { authenticate, getStarted } from '../actions';
 import FullLogo from '../components/FullLogo';
 
 const propTypes = {
   authenticate: PropTypes.func.isRequired,
+  getStarted: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool.isRequired,
-  navigation: PropTypes.shape({
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
 };
 
 class WelcomeScreen extends Component {
@@ -26,14 +23,6 @@ class WelcomeScreen extends Component {
     this.props.authenticate();
   }
 
-  onPress = () => {
-    if (this.props.loggedIn) {
-      this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'main' }));
-    } else {
-      this.props.navigation.dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
-    }
-  }
-
   render() {
     return (
       <View style={style.screenContainer}>
@@ -42,7 +31,10 @@ class WelcomeScreen extends Component {
         </View>
         <View style={style.columnTwo} />
         <View style={style.columnThree}>
-          <TouchableOpacity onPress={this.onPress} style={style.button}>
+          <TouchableOpacity
+            onPress={() => this.props.getStarted(this.props.loggedIn)}
+            style={style.button}
+          >
             <Text style={style.buttonText}>
               get started
             </Text>
@@ -58,4 +50,4 @@ WelcomeScreen.propTypes = propTypes;
 
 const mapStateToProps = ({ loggedIn }) => ({ loggedIn });
 
-export default connect(mapStateToProps, { authenticate })(WelcomeScreen);
+export default connect(mapStateToProps, { authenticate, getStarted })(WelcomeScreen);

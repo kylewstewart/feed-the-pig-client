@@ -4,6 +4,16 @@ import { NavigationActions } from 'react-navigation';
 import Adaptors from '../adaptors';
 import * as type from './types';
 
+export const getStarted = loggedIn => (dispatch) => {
+  if (loggedIn) {
+    dispatch(NavigationActions.navigate({ routeName: 'main' }));
+  } else {
+    dispatch({ type: type.CLEAR_MOBILE });
+    dispatch({ type: type.CLEAR_CODE });
+    dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
+  }
+};
+
 export const mobileInput = text => (
   { type: type.MOBILE_INPUT, payload: text }
 );
@@ -15,7 +25,7 @@ export const codeInput = text => (
 export const logOut = () => (dispatch) => {
   AsyncStorage.removeItem('token');
   dispatch({ type: type.CLEAR_LOGGED_IN });
-  dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
+  dispatch(NavigationActions.navigate({ routeName: 'welcome' }));
 };
 
 export const getCode = mobile => async (dispatch) => {
@@ -74,7 +84,3 @@ export const authenticate = () => async (dispatch) => {
     }
   }
 };
-
-// dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
-// dispatch(NavigationActions.navigate({ routeName: 'mobileInput' }));
-// dispatch(NavigationActions.navigate({ routeName: 'main' }));
