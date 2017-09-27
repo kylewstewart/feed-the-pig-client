@@ -43,6 +43,6 @@ class MobileInput extends Component {
 
 MobileInput.propTypes = propTypes;
 
-const mapStateToProps = state => ({ mobile: state.mobile });
+const mapStateToProps = ({ mobile }) => ({ mobile });
 
 export default connect(mapStateToProps, { mobileInput })(MobileInput);

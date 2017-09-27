@@ -56,6 +56,7 @@ export const logIn = (userId, code) => async (dispatch) => {
   if (response.error) {
     dispatch({ type: type.CLEAR_LOGGED_IN });
     dispatch({ type: type.CLEAR_IS_LOADING });
+    dispatch(NavigationActions.navigate({ routeName: 'error' }));
   } else {
     await AsyncStorage.setItem('token', response.token);
     dispatch({ type: type.SET_TOKEN, payload: response.token });
