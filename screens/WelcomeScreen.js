@@ -29,7 +29,11 @@ class WelcomeScreen extends Component {
         <View style={style.columnOne}>
           <FullLogo />
         </View>
-        <View style={style.columnTwo} />
+        <View style={style.columnTwo}>
+          <Text>
+            Feed the Pig is a digital piggybank in your pocket.
+          </Text>
+        </View>
         <View style={style.columnThree}>
           <TouchableOpacity
             onPress={() => this.props.getStarted(this.props.loggedIn)}
