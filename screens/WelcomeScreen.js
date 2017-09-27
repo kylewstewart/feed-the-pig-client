@@ -7,7 +7,6 @@ import { NavigationActions } from 'react-navigation';
 import style from '../styles/WelcomeScreenStyles';
 import { authenticate } from '../actions';
 import FullLogo from '../components/FullLogo';
-import LoadingComponent from '../components/LoadingComponent';
 
 const propTypes = {
   authenticate: PropTypes.func.isRequired,
@@ -38,7 +37,6 @@ class WelcomeScreen extends Component {
   render() {
     return (
       <View style={style.screenContainer}>
-        <LoadingComponent />
         <View style={style.columnOne}>
           <FullLogo />
         </View>

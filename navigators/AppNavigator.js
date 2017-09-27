@@ -7,6 +7,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
 import MainScreen from '../screens/MainScreen';
+import ErrorScreen from '../screens/ErrorScreen';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -18,6 +19,7 @@ export const AppNavigator = StackNavigator({
   mobileInput: { screen: MobileInputScreen },
   codeInput: { screen: CodeInputScreen },
   main: { screen: MainScreen },
+  error: { screen: ErrorScreen },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

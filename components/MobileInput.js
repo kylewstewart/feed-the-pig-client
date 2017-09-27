@@ -12,11 +12,13 @@ const propTypes = {
 };
 
 class MobileInput extends Component {
-  handleChangedText = text => this.props.mobileInput(text);
+  handleChangedText = (text) => {
+    const mobile = text.replace(/[^\d]/g, '');
+    if (mobile.length < 11) this.props.mobileInput(mobile);
+  };
 
   displayMobile = () => {
     const displayMobile = this.props.mobile.split('');
-    if (displayMobile.length === 0) { displayMobile.slice(0, 0, ''); }
     if (displayMobile.length > 0) { displayMobile.splice(0, 0, '('); }
     if (displayMobile.length > 4) { displayMobile.splice(4, 0, ') '); }
     if (displayMobile.length > 8) { displayMobile.splice(8, 0, '-'); }

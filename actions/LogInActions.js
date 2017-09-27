@@ -23,6 +23,7 @@ export const getCode = mobile => async (dispatch) => {
   if (response.error) {
     dispatch({ type: type.SET_ERROR, payload: response.error });
     dispatch({ type: type.CLEAR_MOBILE });
+    dispatch(NavigationActions.navigate({ routeName: 'error' }));
   } else {
     dispatch({ type: type.CLEAR_ERROR });
     dispatch({ type: type.SET_USER_ID, payload: response.id });

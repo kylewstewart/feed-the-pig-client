@@ -5,7 +5,7 @@ import code from './CodeReducer';
 import userId from './UserIdReducer';
 import loggedIn from './LoggedInReducer';
 import token from './TokenReducer';
-import isLoading from './IsLoadingReducer';
+import Loading from './LoadingReducer';
 import error from './ErrorReducer';
 
 export default combineReducers({
@@ -15,6 +15,6 @@ export default combineReducers({
   userId,
   loggedIn,
   token,
-  isLoading,
+  Loading,
   error,
 });

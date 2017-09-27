@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const LoadingStyles = StyleSheet.create({
+const SpinningPigStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -21,4 +21,4 @@ const LoadingStyles = StyleSheet.create({
   },
 });
 
-export default LoadingStyles;
+export default SpinningPigStyles;
