@@ -18,6 +18,7 @@ class CodeInputScreen extends Component {
   static navigationOptions = {
     title: 'Feed Me Your Code',
     headerTitleStyle: Styles.headerTitle,
+    headerLeft: null,
   };
 
   onPress = () => {

@@ -17,6 +17,7 @@ class MobileInputScreen extends Component {
   static navigationOptions = {
     title: 'Feed Me Your Mobile',
     headerTitleStyle: Styles.headerTitle,
+    headerLeft: null,
   };
 
   onPress = () => {
