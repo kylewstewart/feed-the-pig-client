@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, StackNavigator, TabNavigator } from 'react-navigation';
 
 import WelcomeScreen from '../screens/WelcomeScreen';
 import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
 import MainScreen from '../screens/MainScreen';
 import ErrorScreen from '../screens/ErrorScreen';
+import GoalScreen from '../screens/GoalScreen';
 
 const propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -18,8 +19,12 @@ export const AppNavigator = StackNavigator({
   welcome: { screen: WelcomeScreen },
   mobileInput: { screen: MobileInputScreen },
   codeInput: { screen: CodeInputScreen },
-  main: { screen: MainScreen },
   error: { screen: ErrorScreen },
+  main: { screen: TabNavigator({
+    main: { screen: MainScreen },
+    goals: { screen: GoalScreen },
+  }),
+  },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

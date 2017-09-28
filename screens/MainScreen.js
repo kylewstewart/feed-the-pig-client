@@ -26,6 +26,11 @@ class MainScreen extends Component {
   }
 }
 
+MainScreen.navigationOptions = {
+  tabBarLabel: 'Home',
+  header: null,
+};
+
 MainScreen.propTypes = propTypes;
 
 const mapStateToProps = state => ({ state });

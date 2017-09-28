@@ -15,8 +15,9 @@ const propTypes = {
 
 class WelcomeScreen extends Component {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Oh, Hello',
     headerTitleStyle: style.headerTitle,
+    headerLeft: null,
   };
 
   componentDidMount() {

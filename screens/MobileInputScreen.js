@@ -14,16 +14,8 @@ const propTypes = {
 };
 
 class MobileInputScreen extends Component {
-  static navigationOptions = {
-    title: 'Feed Me Your Mobile',
-    headerTitleStyle: Styles.headerTitle,
-    headerLeft: null,
-  };
-
   onPress = () => {
-    if (this.props.mobile.length === 10) {
-      this.props.getCode(this.props.mobile);
-    }
+    if (this.props.mobile.length === 10) this.props.getCode(this.props.mobile);
   }
 
   render() {
@@ -45,6 +37,12 @@ class MobileInputScreen extends Component {
     );
   }
 }
+
+MobileInputScreen.navigationOptions = {
+  title: 'Feed Me Your Mobile',
+  headerTitleStyle: Styles.headerTitle,
+  headerLeft: null,
+};
 
 MobileInputScreen.propTypes = propTypes;
 
