@@ -4,22 +4,29 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-
 import styles from '../styles/ErrorScreenStyles';
 import SpinningPig from '../components/SpinningPig';
-
 
 const propTypes = {
   nav: PropTypes.shape({
     routes: PropTypes.array.isRequired,
   }).isRequired,
+  navigation: PropTypes.shape({
+    dispatch: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 class ErrorScreen extends Component {
+  static navigationOptions = {
+    title: 'Danger Will Robinson',
+    headerTitleStyle: styles.headerTitle,
+    headerLeft: null,
+  };
 
   onPress = () => {
     const route = this.returnRoute();
-    this.props.navigation.dispatch(NavigationActions.navigate({ routeName: route }))
+    const { dispatch } = this.props.navigation;
+    dispatch(NavigationActions.navigate({ routeName: route }));
   }
 
   returnRoute = () => {
@@ -28,30 +35,24 @@ class ErrorScreen extends Component {
   };
 
   render() {
-    const text = "i'm not feeling so good, go back and try again";
-
+    const text = "i don't feel so good, go back and feed me something else.";
 
     return (
       <View style={styles.screenContainer}>
-        <View style={styles.columnTwo}>
-          <SpinningPig />
-        </View>
-        <View style={styles.columnThree}>
+        <View style={styles.columnOne}>
           <Text style={styles.text}>
             { text }
           </Text>
         </View>
-        <View style={styles.columnThree} >
-          <TouchableOpacity
-            onPress={this.onPress}
-            style={styles.button}
-          >
-            <Text style={styles.buttonText}>
-              go back
-            </Text>
-          </TouchableOpacity>
-
+        <View style={styles.columnTwo}>
+          <SpinningPig />
         </View>
+        <View style={styles.columnThree} >
+          <TouchableOpacity onPress={this.onPress} style={styles.button}>
+            <Text style={styles.buttonText}>go back</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.columnFour} />
       </View>
     );
   }

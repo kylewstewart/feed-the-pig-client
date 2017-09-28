@@ -31,11 +31,9 @@ export const logOut = () => (dispatch) => {
 export const getCode = mobile => async (dispatch) => {
   const response = await Adaptors.getCode(mobile);
   if (response.error) {
-    dispatch({ type: type.SET_ERROR, payload: response.error });
     dispatch({ type: type.CLEAR_MOBILE });
     dispatch(NavigationActions.navigate({ routeName: 'error' }));
   } else {
-    dispatch({ type: type.CLEAR_ERROR });
     dispatch({ type: type.SET_USER_ID, payload: response.id });
     dispatch(NavigationActions.navigate({ routeName: 'codeInput' }));
   }
@@ -51,18 +49,16 @@ export const setToken = token => async (dispatch) => {
 };
 
 export const logIn = (userId, code) => async (dispatch) => {
-  dispatch({ type: type.SET_IS_LOADING });
   const response = await Adaptors.auth(userId, code);
   if (response.error) {
     dispatch({ type: type.CLEAR_LOGGED_IN });
-    dispatch({ type: type.CLEAR_IS_LOADING });
+    dispatch({ type: type.CLEAR_CODE });
     dispatch(NavigationActions.navigate({ routeName: 'error' }));
   } else {
     await AsyncStorage.setItem('token', response.token);
     dispatch({ type: type.SET_TOKEN, payload: response.token });
     dispatch({ type: type.SET_LOGGED_IN });
     dispatch(NavigationActions.navigate({ routeName: 'main' }));
-    dispatch({ type: type.CLEAR_IS_LOADING });
   }
 };
 
