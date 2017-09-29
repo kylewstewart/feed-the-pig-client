@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import Styles from '../styles/CodeInputStyles';
+import styles from '../styles/CodeInputStyles';
 import { codeInput } from '../actions';
-
 
 const propTypes = {
   code: PropTypes.string.isRequired,
@@ -15,23 +14,21 @@ const propTypes = {
 class CodeInput extends Component {
   handleChangedText = text => this.props.codeInput(text);
 
-  render() {
-    return (
-      <TextInput
-        placeholder="XXXXX"
-        keyboardType="numeric"
-        style={Styles.inputField}
-        onChangeText={this.handleChangedText}
-        value={this.props.code}
-        textAlign="center"
-        autoCorrect={false}
-        autoFocus
-        autoCapitalize="characters"
-        pointerEvents="none"
-        maxLength={5}
-      />
-    );
-  }
+  render = () => (
+    <TextInput
+      placeholder="XXXXX"
+      keyboardType="numeric"
+      style={styles.inputField}
+      onChangeText={this.handleChangedText}
+      value={this.props.code}
+      textAlign="center"
+      autoCorrect={false}
+      autoFocus
+      autoCapitalize="characters"
+      pointerEvents="none"
+      maxLength={5}
+    />
+  );
 }
 
 CodeInput.propTypes = propTypes;

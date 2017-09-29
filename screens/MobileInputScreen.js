@@ -18,24 +18,22 @@ class MobileInputScreen extends Component {
     if (this.props.mobile.length === 10) this.props.getCode(this.props.mobile);
   }
 
-  render() {
-    return (
-      <View style={Styles.screenContainer}>
-        <View style={Styles.columnOne}>
-          <FullLogo />
-        </View>
-        <View style={Styles.columnTwo}>
-          <MobileInput />
-          <TouchableOpacity onPress={this.onPress} style={Styles.button}>
-            <Text style={Styles.buttonText}>
-              get code
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={Styles.columnThree} />
+  render = () => (
+    <View style={Styles.screenContainer}>
+      <View style={Styles.columnOne}>
+        <FullLogo />
       </View>
-    );
-  }
+      <View style={Styles.columnTwo}>
+        <MobileInput />
+        <TouchableOpacity onPress={this.onPress} style={Styles.button}>
+          <Text style={Styles.buttonText}>
+            get code
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={Styles.columnThree} />
+    </View>
+  );
 }
 
 MobileInputScreen.navigationOptions = {

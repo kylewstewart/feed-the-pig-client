@@ -8,6 +8,8 @@ import MobileInputScreen from '../screens/MobileInputScreen';
 import CodeInputScreen from '../screens/CodeInputScreen';
 import MainScreen from '../screens/MainScreen';
 import ErrorScreen from '../screens/ErrorScreen';
+import FeedMeScreen from '../screens/FeedMeScreen';
+import GoalsScreen from '../screens/GoalsScreen';
 import GoalScreen from '../screens/GoalScreen';
 
 const propTypes = {
@@ -15,16 +17,25 @@ const propTypes = {
   nav: PropTypes.shape({}).isRequired,
 };
 
+const GoalNavigator = StackNavigator({
+  goals: { screen: GoalsScreen },
+  goal: { screen: GoalScreen },
+},
+{ headerMode: 'none' },
+);
+
+const MainNavigator = TabNavigator({
+  main: { screen: MainScreen },
+  feedMe: { screen: FeedMeScreen },
+  goals: { screen: GoalNavigator },
+});
+
 export const AppNavigator = StackNavigator({
   welcome: { screen: WelcomeScreen },
   mobileInput: { screen: MobileInputScreen },
   codeInput: { screen: CodeInputScreen },
   error: { screen: ErrorScreen },
-  main: { screen: TabNavigator({
-    main: { screen: MainScreen },
-    goals: { screen: GoalScreen },
-  }),
-  },
+  main: { screen: MainNavigator },
 });
 
 const AppWithNavigationState = ({ dispatch, nav }) => (

@@ -7,6 +7,7 @@ import loggedIn from './LoggedInReducer';
 import token from './TokenReducer';
 import Loading from './LoadingReducer';
 import error from './ErrorReducer';
+import goals from './GoalsReducer';
 
 export default combineReducers({
   mobile,
@@ -17,4 +18,5 @@ export default combineReducers({
   token,
   Loading,
   error,
+  goals,
 });

@@ -14,42 +14,39 @@ const propTypes = {
 };
 
 class WelcomeScreen extends Component {
-  static navigationOptions = {
-    title: 'Oh, Hello',
-    headerTitleStyle: style.headerTitle,
-    headerLeft: null,
-  };
+  componentDidMount = () => this.props.authenticate();
 
-  componentDidMount() {
-    this.props.authenticate();
-  }
-
-  render() {
-    return (
-      <View style={style.screenContainer}>
-        <View style={style.columnOne}>
-          <FullLogo />
-        </View>
-        <View style={style.columnTwo}>
-          <Text>
-            Feed the Pig is a digital piggybank in your pocket.
-          </Text>
-        </View>
-        <View style={style.columnThree}>
-          <TouchableOpacity
-            onPress={() => this.props.getStarted(this.props.loggedIn)}
-            style={style.button}
-          >
-            <Text style={style.buttonText}>
-              get started
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={style.columnFour} />
+  render = () => (
+    <View style={style.screenContainer}>
+      <View style={style.columnOne}>
+        <FullLogo />
       </View>
-    );
-  }
+      <View style={style.columnTwo}>
+        <Text>
+          Feed the Pig is a digital piggybank in your pocket.
+        </Text>
+      </View>
+      <View style={style.columnThree}>
+        <TouchableOpacity
+          onPress={() => this.props.getStarted(this.props.loggedIn)}
+          style={style.button}
+        >
+          <Text style={style.buttonText}>
+            get started
+          </Text>
+        </TouchableOpacity>
+      </View>
+      <View style={style.columnFour} />
+    </View>
+  );
+
 }
+
+WelcomeScreen.navigationOptions = {
+  title: 'Oh, Hello',
+  headerTitleStyle: style.headerTitle,
+  headerLeft: null,
+};
 
 WelcomeScreen.propTypes = propTypes;
 

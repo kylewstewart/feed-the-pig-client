@@ -17,46 +17,36 @@ const propTypes = {
 };
 
 class ErrorScreen extends Component {
-  static navigationOptions = {
-    title: 'Danger Will Robinson',
-    headerTitleStyle: styles.headerTitle,
-    headerLeft: null,
-  };
+  onPress = () => this.props.navigation
+    .dispatch(NavigationActions.navigate({ routeName: this.returnRoute() }));
 
-  onPress = () => {
-    const route = this.returnRoute();
-    const { dispatch } = this.props.navigation;
-    dispatch(NavigationActions.navigate({ routeName: route }));
-  }
+  returnRoute = () => this.props.nav.routes[this.props.nav.routes.length - 2].routeName;
 
-  returnRoute = () => {
-    const { routes } = this.props.nav;
-    return routes[routes.length - 2].routeName;
-  };
-
-  render() {
-    const text = "i don't feel so good, go back and feed me something else.";
-
-    return (
-      <View style={styles.screenContainer}>
-        <View style={styles.columnOne}>
-          <Text style={styles.text}>
-            { text }
-          </Text>
-        </View>
-        <View style={styles.columnTwo}>
-          <SpinningPig />
-        </View>
-        <View style={styles.columnThree} >
-          <TouchableOpacity onPress={this.onPress} style={styles.button}>
-            <Text style={styles.buttonText}>go back</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.columnFour} />
+  render = () => (
+    <View style={styles.screenContainer}>
+      <View style={styles.columnOne}>
+        <Text style={styles.text}>
+          {"i don't feel so good, go back and feed me something else."}
+        </Text>
       </View>
-    );
-  }
+      <View style={styles.columnTwo}>
+        <SpinningPig />
+      </View>
+      <View style={styles.columnThree} >
+        <TouchableOpacity onPress={this.onPress} style={styles.button}>
+          <Text style={styles.buttonText}>go back</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.columnFour} />
+    </View>
+  );
 }
+
+ErrorScreen.navigationOptions = {
+  title: 'Danger Will Robinson',
+  headerTitleStyle: styles.headerTitle,
+  headerLeft: null,
+};
 
 ErrorScreen.propTypes = propTypes;
 

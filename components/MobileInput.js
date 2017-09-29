@@ -4,7 +4,7 @@ import { TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { mobileInput } from '../actions';
 
-import Styles from '../styles/MobileInputStyles';
+import styles from '../styles/MobileInputStyles';
 
 const propTypes = {
   mobile: PropTypes.string.isRequired,
@@ -25,20 +25,18 @@ class MobileInput extends Component {
     return displayMobile.join('');
   }
 
-  render() {
-    return (
-      <TextInput
-        placeholder="(555) 555-5555"
-        keyboardType="phone-pad"
-        style={Styles.inputField}
-        onChangeText={this.handleChangedText}
-        value={this.props.mobile ? this.displayMobile() : null}
-        textAlign="center"
-        autoFocus
-        pointerEvents="none"
-      />
-    );
-  }
+  render = () => (
+    <TextInput
+      placeholder="(555) 555-5555"
+      keyboardType="phone-pad"
+      style={styles.inputField}
+      onChangeText={this.handleChangedText}
+      value={this.props.mobile ? this.displayMobile() : null}
+      textAlign="center"
+      autoFocus
+      pointerEvents="none"
+    />
+  );
 }
 
 MobileInput.propTypes = propTypes;

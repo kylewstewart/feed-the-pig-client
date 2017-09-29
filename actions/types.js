@@ -20,3 +20,6 @@ export const CLEAR_IS_LOADING = 'clear_is_loading';
 
 export const SET_ERROR = 'set_error';
 export const CLEAR_ERROR = 'clear_error';
+
+export const SET_GOALS = 'set_goals';
+export const CLEAR_GOALS = 'clear_goals';

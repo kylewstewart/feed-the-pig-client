@@ -28,7 +28,8 @@ class MainScreen extends Component {
 
 MainScreen.navigationOptions = {
   tabBarLabel: 'Home',
-  header: null,
+  title: 'Home',
+  headerLeft: null,
 };
 
 MainScreen.propTypes = propTypes;
