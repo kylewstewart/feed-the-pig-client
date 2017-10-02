@@ -20,8 +20,6 @@ const GoalListItemStyles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10,
     paddingLeft: 20,
-    // justifyContent: 'center',
-    // alignItems: 'center',
   },
   title: {
     fontFamily: 'Avenir Next',
