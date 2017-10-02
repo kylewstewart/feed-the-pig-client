@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { Text, FlatList, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchGoals } from '../actions';
 
 const propTypes = {
-  fetchGoals: PropTypes.func.isRequired,
 };
 
 class GoalsScreen extends Component {
-  componentDidMount = () => this.props.fetchGoals();
+  onPress(id) {
+    console.log('on press', id);
+  }
 
-  render = () => <View />;
+  render() {
+    return (
+      <FlatList
+        data={this.props.goals}
+        keyExtractor={item => item.id}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => this.onPress(item.id)}>
+            <Text>
+              {item.name}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+    );
+  }
 }
 
 GoalsScreen.navigationOptions = {
@@ -22,6 +36,6 @@ GoalsScreen.navigationOptions = {
 
 GoalsScreen.propTypes = propTypes;
 
-const mapStateToProps = state => ({ state });
+const mapStateToProps = ({ goals }) => ({ goals });
 
-export default connect(mapStateToProps, { fetchGoals })(GoalsScreen);
+export default connect(mapStateToProps)(GoalsScreen);

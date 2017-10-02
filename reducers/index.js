@@ -8,6 +8,7 @@ import token from './TokenReducer';
 import Loading from './LoadingReducer';
 import error from './ErrorReducer';
 import goals from './GoalsReducer';
+import goal from './GoalReducer';
 
 export default combineReducers({
   mobile,
@@ -19,4 +20,5 @@ export default combineReducers({
   Loading,
   error,
   goals,
+  goal,
 });

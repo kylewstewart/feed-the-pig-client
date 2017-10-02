@@ -23,3 +23,6 @@ export const CLEAR_ERROR = 'clear_error';
 
 export const SET_GOALS = 'set_goals';
 export const CLEAR_GOALS = 'clear_goals';
+
+export const SET_GOAL = 'set_goal';
+export const CLEAR_GOAL = 'clear_goal';

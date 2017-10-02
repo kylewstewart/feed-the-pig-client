@@ -1,19 +1,19 @@
-import { SET_GOALS, CLEAR_GOALS } from '../actions/types';
+import { SET_GOAL, CLEAR_GOAL } from '../actions/types';
 
-const initialState = [{
+const initialState = {
   id: 0,
   name: '',
   amount: 0,
   date: '',
   rate: 0,
-}];
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SET_GOALS: {
+    case SET_GOAL: {
       return action.payload;
     }
-    case CLEAR_GOALS: {
+    case CLEAR_GOAL: {
       return null;
     }
     default:
