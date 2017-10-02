@@ -46,6 +46,7 @@ WelcomeScreen.navigationOptions = {
   title: 'Oh, Hello',
   headerTitleStyle: style.headerTitle,
   headerLeft: null,
+  headerBackTitle: 'All Pigs',
 };
 
 WelcomeScreen.propTypes = propTypes;

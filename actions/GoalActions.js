@@ -13,5 +13,8 @@ export const fetchGoals = () => async (dispatch) => {
 export const setGoal = (id, goals) => (dispatch) => {
   const goal = goals.find(g => g.id === id);
   dispatch({ type: Types.SET_GOAL, payload: goal });
-  dispatch(NavigationActions.navigate({ routeName: 'goal' }));
+  dispatch(NavigationActions.navigate({
+    routeName: 'goal',
+    params: { header: goal.name },
+  }));
 };

@@ -4,6 +4,7 @@ const initialState = [{
   id: 0,
   name: '',
   amount: 0,
+  saved: 0,
   date: '',
   rate: 0,
 }];
