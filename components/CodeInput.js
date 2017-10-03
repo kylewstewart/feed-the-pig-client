@@ -24,7 +24,6 @@ class CodeInput extends Component {
       textAlign="center"
       autoCorrect={false}
       autoFocus
-      autoCapitalize="characters"
       pointerEvents="none"
       maxLength={5}
     />
