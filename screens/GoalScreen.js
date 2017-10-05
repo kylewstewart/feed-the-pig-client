@@ -31,9 +31,19 @@ class GoalScreen extends Component {
       case 'name': {
         return input;
       }
+      case 'saved':
       case 'amount': {
-        return input.replace(/[^\d]/g, '')
+        const unformatted = input.replace(/[^\d]/g, '');
+        const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
+        const parts = numWithDecimals.split('.');
+        return ['$', Number(parts[0]).toLocaleString(), (parts[1] ? `.${parts[1]}` : '')].join('');
       }
+      //
+      //   const unformatted = input.replace(/[^\d]/g, '');
+      //   const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
+      //   const parts = numWithDecimals.split('.');
+      //   return ['$', Number(parts[0]).toLocaleString(), (parts[1] ? `.${parts[1]}` : '')].join('');
+      // }
       default:
         return input;
     }
