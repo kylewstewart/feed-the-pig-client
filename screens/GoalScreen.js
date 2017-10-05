@@ -24,26 +24,31 @@ class GoalScreen extends Component {
     rate: this.props.goal.rate,
   };
 
-  onChange = text => this.setState({ [text.field]: this.formatedInput(text) });
+  onChange = text => this.setState(prevState => (
+    { [text.field]: this.formatedInput(text, prevState) }),
+  );
 
-  formatedInput = ({ field, input }) => {
+  formatedInput = ({ field, input }, prevState) => {
     switch (field) {
       case 'name': {
         return input;
       }
       case 'saved':
       case 'amount': {
+        if (input === '$0.0') return '';
         const unformatted = input.replace(/[^\d]/g, '');
         const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
-        const parts = numWithDecimals.split('.');
-        return ['$', Number(parts[0]).toLocaleString(), (parts[1] ? `.${parts[1]}` : '')].join('');
+        const split = numWithDecimals.split('.');
+        return ['$', Number(split[0]).toLocaleString(), (split[1] ? `.${split[1]}` : '')].join('');
       }
-      //
-      //   const unformatted = input.replace(/[^\d]/g, '');
-      //   const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
-      //   const parts = numWithDecimals.split('.');
-      //   return ['$', Number(parts[0]).toLocaleString(), (parts[1] ? `.${parts[1]}` : '')].join('');
-      // }
+      case 'date': {
+        const unformatted = input.replace(/[^\d]/g, '');
+        const split = unformatted.split('');
+        if (split.length > 8) return prevState.date;
+        if (split.length > 4) split.splice(4, 0, '/');
+        if (split.length > 2) split.splice(2, 0, '/');
+        return split.join('');
+      }
       default:
         return input;
     }
@@ -68,7 +73,7 @@ class GoalScreen extends Component {
         <View style={styles.inputContainer}>
           <Text style={styles.text}> Goal </Text>
           <TextInput
-            placeholder="XXXX.XX"
+            placeholder="$X,XXX.XX"
             keyboardType="numeric"
             style={styles.inputField}
             onChangeText={text => this.onChange({ input: text, field: 'amount' })}
@@ -88,7 +93,7 @@ class GoalScreen extends Component {
         <View style={styles.inputContainer}>
           <Text style={styles.text}> Saved </Text>
           <TextInput
-            placeholder="X,XXX.XX"
+            placeholder="$X,XXX.XX"
             keyboardType="numeric"
             style={styles.inputField}
             onChangeText={text => this.onChange({ input: text, field: 'saved' })}
@@ -101,7 +106,7 @@ class GoalScreen extends Component {
             placeholder="X.XX%"
             keyboardType="numeric"
             style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'saved' })}
+            onChangeText={text => this.onChange({ input: text, field: 'rate' })}
             value={rate}
           />
         </View>
