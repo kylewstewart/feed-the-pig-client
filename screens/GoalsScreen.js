@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, FlatList, View, TouchableOpacity } from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { setGoal } from '../actions';
@@ -12,9 +12,9 @@ const propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
-      amount: PropTypes.number.isRequired,
+      amount: PropTypes.string.isRequired,
       date: PropTypes.string.isRequired,
-      rate: PropTypes.number.isRequired,
+      rate: PropTypes.string.isRequired,
     }),
   ).isRequired,
   setGoal: PropTypes.func.isRequired,

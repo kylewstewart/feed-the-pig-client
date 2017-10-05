@@ -3,10 +3,10 @@ import { SET_GOAL, CLEAR_GOAL } from '../actions/types';
 const initialState = {
   id: 0,
   name: '',
-  amount: 0,
-  saved: 0,
+  amount: '',
+  saved: '',
   date: '',
-  rate: 0,
+  rate: '',
 };
 
 export default (state = initialState, action) => {

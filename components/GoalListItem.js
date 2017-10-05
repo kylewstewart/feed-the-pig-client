@@ -7,8 +7,8 @@ import styles from '../styles/GoalListItemStyles';
 const propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    amount: PropTypes.number.isRequired,
-    saved: PropTypes.number.isRequired,
+    amount: PropTypes.string.isRequired,
+    saved: PropTypes.string.isRequired,
   }).isRequired,
 };
 
@@ -35,10 +35,10 @@ class GoalListItem extends Component {
           </Text>
           <View style={styles.propContainer}>
             <Text style={styles.propOne}>
-              Goal: {this.displayNum(amount)}
+              Goal: {amount}
             </Text>
             <Text style={styles.propTwo}>
-              Saved: {this.displayNum(saved)}
+              Saved: {saved}
             </Text>
           </View>
         </View>
