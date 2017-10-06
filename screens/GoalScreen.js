@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, DatePickerIOS, Modal } from 'react-native';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -19,14 +19,22 @@ class GoalScreen extends Component {
   state = {
     name: this.props.goal.name,
     amount: this.props.goal.amount,
-    date: this.props.goal.date,
+    date: new Date(this.props.goal.date),
     saved: this.props.goal.saved,
     rate: this.props.goal.rate,
+    showDatePicker: false,
+    showSubmit: false,
   };
 
   onChange = text => this.setState(prevState => (
-    { [text.field]: this.formatedInput(text, prevState) }),
-  );
+    { [text.field]: this.formatedInput(text, prevState) }
+  ));
+
+  onDatePress = () => this.setState(prevState => (
+    { showDatePicker: !prevState.showDatePicker }
+  ));
+
+  displayDate = () => this.state.date.toLocaleDateString();
 
   formatedInput = ({ field, input }, prevState) => {
     switch (field) {
@@ -41,13 +49,8 @@ class GoalScreen extends Component {
         const split = numWithDecimals.split('.');
         return ['$', Number(split[0]).toLocaleString(), (split[1] ? `.${split[1]}` : '')].join('');
       }
-      case 'date': {
-        const unformatted = input.replace(/[^\d]/g, '');
-        const split = unformatted.split('');
-        if (split.length > 8) return prevState.date;
-        if (split.length > 4) split.splice(4, 0, '/');
-        if (split.length > 2) split.splice(2, 0, '/');
-        return split.join('');
+      case 'rate': {
+        return input;
       }
       default:
         return input;
@@ -55,69 +58,101 @@ class GoalScreen extends Component {
   }
 
   render() {
-    const { name, amount, date, saved, rate } = this.state;
+    const { name, amount, date, saved, rate, showDatePicker, showSubmit } = this.state;
 
     return (
       <View style={styles.screenContainer}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}> Name </Text>
-          <TextInput
-            placeholder="a brand new bag"
-            keyboardType="default"
-            autoCorrect={false}
-            style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'name' })}
-            value={name}
-          />
+
+        <View style={styles.goalContainer}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}> Name </Text>
+            <TextInput
+              placeholder="a brand new bag"
+              keyboardType="default"
+              autoCorrect={false}
+              style={styles.inputField}
+              onChangeText={text => this.onChange({ input: text, field: 'name' })}
+              value={name}
+              />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}> Goal </Text>
+            <TextInput
+              placeholder="$X,XXX.XX"
+              keyboardType="numeric"
+              style={styles.inputField}
+              onChangeText={text => this.onChange({ input: text, field: 'amount' })}
+              value={amount}
+              />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}> Date </Text>
+            <TouchableOpacity style={styles.dateField} onPress={this.onDatePress}>
+              <Text style={styles.dateText}>
+                {this.displayDate()}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}> Saved </Text>
+            <TextInput
+              placeholder="$X,XXX.XX"
+              keyboardType="numeric"
+              style={styles.inputField}
+              onChangeText={text => this.onChange({ input: text, field: 'saved' })}
+              value={saved}
+              />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.text}> Est. Return </Text>
+            <TextInput
+              placeholder="X.XX%"
+              keyboardType="numeric"
+              style={styles.inputField}
+              onChangeText={text => this.onChange({ input: text, field: 'rate' })}
+              value={rate}
+              />
+          </View>
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}> Goal </Text>
-          <TextInput
-            placeholder="$X,XXX.XX"
-            keyboardType="numeric"
-            style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'amount' })}
-            value={amount}
-          />
+
+        <View style={styles.submitContainer}>
+          {showSubmit ?
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={this.onPress} style={styles.button}>
+                <Text style={styles.buttonText}>
+                  submit
+                </Text>
+              </TouchableOpacity>
+            </View> :
+            <View />
+          }
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}> Date </Text>
-          <TextInput
-            placeholder="MM/DD/YY"
-            keyboardType="numeric"
-            style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'date' })}
-            value={date}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}> Saved </Text>
-          <TextInput
-            placeholder="$X,XXX.XX"
-            keyboardType="numeric"
-            style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'saved' })}
-            value={saved}
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.text}> Est. Return </Text>
-          <TextInput
-            placeholder="X.XX%"
-            keyboardType="numeric"
-            style={styles.inputField}
-            onChangeText={text => this.onChange({ input: text, field: 'rate' })}
-            value={rate}
-          />
-        </View>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity onPress={this.onPress} style={styles.button}>
-            <Text style={styles.buttonText}>
-              submit
-            </Text>
-          </TouchableOpacity>
-        </View>
+
         <View style={styles.keyboardSpacer} />
+
+        <Modal
+          animationType="slide"
+          visible={showDatePicker}
+          transparent
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalSpacer} />
+            <View style={styles.dateButtonContainer}>
+              <TouchableOpacity style={styles.dateButton} onPress={this.onDatePress}>
+                <Text style={styles.buttonText}> close </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.datePickerContainer}>
+              <DatePickerIOS
+                date={date}
+                minimumDate={new Date()}
+                onDateChange={text => this.onChange({ input: text, field: 'date' })}
+                mode="date"
+                />
+            </View>
+          </View>
+        </Modal>
+
       </View>
     );
   }
@@ -133,3 +168,11 @@ GoalScreen.propTypes = propTypes;
 const mapStateToProps = ({ goal }) => ({ title: goal.name, goal });
 
 export default connect(mapStateToProps)(GoalScreen);
+
+// <TextInput
+//   placeholder="MM/DD/YY"
+//   keyboardType="numeric"
+//   style={styles.inputField}
+//   onChangeText={text => this.onChange({ input: text, field: 'date' })}
+//   value={date}
+// />

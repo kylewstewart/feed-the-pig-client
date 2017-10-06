@@ -5,10 +5,19 @@ const GoalScreenStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 10,
+  },
+  goalContainer: {
+    flex: 5,
     justifyContent: 'space-around',
   },
-  inputContainer: {
+  submitContainer: {
     flex: 1,
+  },
+  keyboardSpacer: {
+    flex: 4,
+  },
+
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -16,9 +25,6 @@ const GoalScreenStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  keyboardSpacer: {
-    height: '40%',
   },
   text: {
     fontFamily: 'Avenir Next',
@@ -32,6 +38,12 @@ const GoalScreenStyles = StyleSheet.create({
     borderWidth: 0,
     fontSize: 16,
     width: '60%',
+  },
+  dateField: {
+    width: '60%',
+  },
+  dateText: {
+    fontSize: 16,
   },
   button: {
     borderWidth: 1,
@@ -49,6 +61,29 @@ const GoalScreenStyles = StyleSheet.create({
     fontSize: 20,
     color: '#005A9C',
     fontWeight: '500',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  modalSpacer: {
+    flex: 12,
+  },
+  dateButtonContainer: {
+    flex: 2,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    padding: 10,
+  },
+  dateButton: {
+    borderWidth: 1,
+    backgroundColor: '#005A9C',
+    padding: 5,
+  },
+  datePickerContainer: {
+    flex: 8,
+    backgroundColor: '#CCCCCC',
   },
 });
 
