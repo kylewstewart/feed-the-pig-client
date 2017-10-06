@@ -22,6 +22,9 @@ export const SET_ERROR = 'set_error';
 export const CLEAR_ERROR = 'clear_error';
 
 export const SET_GOALS = 'set_goals';
+export const ADD_GOAL = 'add_goal';
+export const EDIT_GOAL = 'edit_goal';
+export const DELETE_GOAL = 'delete_goal';
 export const CLEAR_GOALS = 'clear_goals';
 
 export const SET_GOAL = 'set_goal';

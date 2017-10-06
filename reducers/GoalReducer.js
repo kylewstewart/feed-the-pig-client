@@ -5,7 +5,7 @@ const initialState = {
   name: '',
   amount: '',
   saved: '',
-  date: '',
+  date: new Date(),
   rate: '',
 };
 

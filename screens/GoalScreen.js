@@ -4,53 +4,60 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import styles from '../styles/GoalScreenStyles';
+import { submitGoal } from '../actions';
 
 const propTypes = {
   goal: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     amount: PropTypes.string.isRequired,
     saved: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
+    date: PropTypes.instanceOf(Date).isRequired,
     rate: PropTypes.string.isRequired,
   }).isRequired,
+  submitGoal: PropTypes.func.isRequired,
 };
 
 class GoalScreen extends Component {
-  state = {
-    name: this.props.goal.name,
-    amount: this.props.goal.amount,
-    date: new Date(this.props.goal.date),
-    saved: this.props.goal.saved,
-    rate: this.props.goal.rate,
-    showDatePicker: false,
-    showSubmit: false,
+  state = { showSubmit: true, showDatePicker: false }
+
+  componentWillMount = () => this.setPropsToState();
+
+  onSubmit = () => {
+    const { id, name, amount, date, saved, rate } = this.state;
+    const goal = { id, name, amount, date, saved, rate };
+    this.props.submitGoal(goal);
   };
 
-  onChange = text => this.setState(prevState => (
-    { [text.field]: this.formatedInput(text, prevState) }
-  ));
+  onReset = () => this.setPropsToState();
 
-  onDatePress = () => this.setState(prevState => (
-    { showDatePicker: !prevState.showDatePicker }
-  ));
+  onChange = text => this.setState({ [text.field]: this.formatedInput(text) });
 
-  displayDate = () => this.state.date.toLocaleDateString();
+  onDatePress = () => this.setState(prevState => ({
+    showDatePicker: !prevState.showDatePicker,
+    showSubmit: !!prevState.showDatePicker,
+  }));
 
-  formatedInput = ({ field, input }, prevState) => {
+  setPropsToState = () => {
+    const { id, name, amount, date, saved, rate } = this.props.goal;
+    this.setState({ id, name, amount, date, saved, rate });
+  };
+
+
+  formatedInput = ({ field, input }) => {
     switch (field) {
-      case 'name': {
-        return input;
-      }
       case 'saved':
       case 'amount': {
-        if (input === '$0.0') return '';
-        const unformatted = input.replace(/[^\d]/g, '');
-        const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
+        const digitsOnly = input.replace(/[^\d]/g, '');
+        const numWithDecimals = (Number(digitsOnly) / 100).toFixed(2);
         const split = numWithDecimals.split('.');
         return ['$', Number(split[0]).toLocaleString(), (split[1] ? `.${split[1]}` : '')].join('');
       }
       case 'rate': {
-        return input;
+        const unformatted = input.replace(/[^\d]/g, '');
+        const numWithDecimals = (Number(unformatted) / 100).toFixed(2);
+        const split = numWithDecimals.split('.');
+        return [Number(split[0]).toLocaleString(), (split[1] ? `.${split[1]}` : ''), '%'].join('');
       }
       default:
         return input;
@@ -73,7 +80,7 @@ class GoalScreen extends Component {
               style={styles.inputField}
               onChangeText={text => this.onChange({ input: text, field: 'name' })}
               value={name}
-              />
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.text}> Goal </Text>
@@ -83,13 +90,13 @@ class GoalScreen extends Component {
               style={styles.inputField}
               onChangeText={text => this.onChange({ input: text, field: 'amount' })}
               value={amount}
-              />
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.text}> Date </Text>
             <TouchableOpacity style={styles.dateField} onPress={this.onDatePress}>
               <Text style={styles.dateText}>
-                {this.displayDate()}
+                {date.toLocaleDateString()}
               </Text>
             </TouchableOpacity>
           </View>
@@ -101,7 +108,7 @@ class GoalScreen extends Component {
               style={styles.inputField}
               onChangeText={text => this.onChange({ input: text, field: 'saved' })}
               value={saved}
-              />
+            />
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.text}> Est. Return </Text>
@@ -109,24 +116,28 @@ class GoalScreen extends Component {
               placeholder="X.XX%"
               keyboardType="numeric"
               style={styles.inputField}
+              selection={{ start: rate.length - 1, end: rate.length - 1 }}
               onChangeText={text => this.onChange({ input: text, field: 'rate' })}
               value={rate}
-              />
+            />
           </View>
         </View>
 
-        <View style={styles.submitContainer}>
-          {showSubmit ?
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={this.onPress} style={styles.button}>
-                <Text style={styles.buttonText}>
-                  submit
-                </Text>
-              </TouchableOpacity>
-            </View> :
-            <View />
-          }
-        </View>
+        {showSubmit ?
+          <View style={styles.submitContainer}>
+            <TouchableOpacity onPress={this.onSubmit} style={styles.submitButton}>
+              <Text style={styles.submitButtonText}>
+                submit
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.onReset} style={styles.submitButton}>
+              <Text style={styles.submitButtonText}>
+                reset
+              </Text>
+            </TouchableOpacity>
+          </View> :
+          <View style={styles.submitContainer} />
+        }
 
         <View style={styles.keyboardSpacer} />
 
@@ -139,7 +150,7 @@ class GoalScreen extends Component {
             <View style={styles.modalSpacer} />
             <View style={styles.dateButtonContainer}>
               <TouchableOpacity style={styles.dateButton} onPress={this.onDatePress}>
-                <Text style={styles.buttonText}> close </Text>
+                <Text style={styles.dateButtonText}> close </Text>
               </TouchableOpacity>
             </View>
             <View style={styles.datePickerContainer}>
@@ -148,7 +159,7 @@ class GoalScreen extends Component {
                 minimumDate={new Date()}
                 onDateChange={text => this.onChange({ input: text, field: 'date' })}
                 mode="date"
-                />
+              />
             </View>
           </View>
         </Modal>
@@ -167,12 +178,4 @@ GoalScreen.propTypes = propTypes;
 
 const mapStateToProps = ({ goal }) => ({ title: goal.name, goal });
 
-export default connect(mapStateToProps)(GoalScreen);
-
-// <TextInput
-//   placeholder="MM/DD/YY"
-//   keyboardType="numeric"
-//   style={styles.inputField}
-//   onChangeText={text => this.onChange({ input: text, field: 'date' })}
-//   value={date}
-// />
+export default connect(mapStateToProps, { submitGoal })(GoalScreen);

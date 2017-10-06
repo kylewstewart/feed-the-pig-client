@@ -1,20 +1,33 @@
 import { AsyncStorage } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
-import * as Adaptors from '../adaptors';
-import * as Types from './types';
+import * as adaptors from '../adaptors';
+import * as types from './types';
 
 export const fetchGoals = () => async (dispatch) => {
   const token = await AsyncStorage.getItem('token');
-  const goals = await Adaptors.goals(token);
-  dispatch({ type: Types.SET_GOALS, payload: goals });
+  const goals = await adaptors.goals(token);
+  dispatch({ type: types.SET_GOALS, payload: goals });
 };
 
 export const setGoal = (id, goals) => (dispatch) => {
   const goal = goals.find(g => g.id === id);
-  dispatch({ type: Types.SET_GOAL, payload: goal });
+  dispatch({ type: types.SET_GOAL, payload: goal });
   dispatch(NavigationActions.navigate({
     routeName: 'goal',
     params: { header: goal.name },
   }));
+};
+
+export const addNew = () => (dispatch) => {
+  dispatch(NavigationActions.navigate({ routeName: 'goal' }));
+}
+
+export const submitGoal = goal => async (dispatch) => {
+  const token = await AsyncStorage.getItem('token');
+  if (!goal.id) {
+    const savedGoal = await adaptors.createGoal(token, goal);
+    dispatch({ type: types.ADD_GOAL, payload: savedGoal });
+    dispatch(NavigationActions.navigate({ routeName: 'goals' }));
+  }
 };

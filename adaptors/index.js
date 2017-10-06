@@ -42,3 +42,15 @@ export const goals = token => (
     },
   }).then(response => response.json())
 );
+
+export const createGoal = (token, goal) => (
+  fetch(`${baseURL}/goals`, {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `${token}`,
+    },
+    body: JSON.stringify(goal),
+  }).then(response => response.json())
+);
