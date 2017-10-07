@@ -13,14 +13,14 @@ export const fetchGoals = () => async (dispatch) => {
 export const setGoal = (id, goals) => (dispatch) => {
   const goal = goals.find(g => g.id === id);
   dispatch({ type: types.SET_GOAL, payload: goal });
-  dispatch(NavigationActions.navigate({
-    routeName: 'goal',
-    params: { header: goal.name },
-  }));
+  dispatch(NavigationActions.navigate({ routeName: 'goal', params: { header: goal.name } }));
 };
 
 export const addNew = () => (dispatch) => {
-  dispatch(NavigationActions.navigate({ routeName: 'goal' }));
+  dispatch({ type: types.CLEAR_GOAL });
+  const routeName = 'goal';
+  const header = 'New Pig';
+  dispatch(NavigationActions.navigate({ routeName, params: { header } }));
 };
 
 export const submitGoal = goal => async (dispatch) => {

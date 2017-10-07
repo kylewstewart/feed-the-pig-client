@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FlatList, View, TouchableOpacity, Button } from 'react-native';
+import { Image, Text, FlatList, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import { setGoal, addNew } from '../actions';
@@ -8,6 +8,7 @@ import styles from '../styles/GoalsScreenStyles';
 import GoalListItem from '../components/GoalListItem';
 
 const propTypes = {
+  addNew: PropTypes.func.isRequired,
   navigation: PropTypes.shape({
     setParams: PropTypes.func.isRequried,
   }).isRequired,
@@ -24,19 +25,7 @@ const propTypes = {
 };
 
 class GoalsScreen extends Component {
-  static navigationOptions = navigation => ({
-    title: 'Your Pigs',
-    headerTitleStyle: styles.headerTitle,
-    headerLeft: null,
-    headerRight: (
-      <Button
-        title={'Add a Pig'}
-        onPress={navigation.state.params.addNew}
-      />
-    ),
-  });
-
-  componentWillMount() {
+  componentDidMount() {
     this.props.navigation.setParams({ addNew: this.props.addNew });
   }
 
@@ -57,17 +46,23 @@ class GoalsScreen extends Component {
   );
 }
 
-// GoalsScreen.navigationOptions = navigation => ({
-//   title: 'Your Pigs',
-//   headerTitleStyle: styles.headerTitle,
-//   headerLeft: null,
-//   headerRight: (
-//     <Button
-//       title={'Add a Pig'}
-//       onPress={navigation.state.params.addNew}
-//     />
-//   ),
-// });
+GoalsScreen.navigationOptions = ({ navigation }) => ({
+  title: 'Your Pigs',
+  headerTitleStyle: styles.headerTitle,
+  headerLeft: null,
+  headerRight: (
+    <TouchableOpacity onPress={() => navigation.state.params.addNew()}>
+      <View style={styles.headerRightContainer}>
+        <Text style={styles.headerRightText}> new </Text>
+        <Image
+          style={styles.image}
+          source={require('../assets/icons/pig-icon.png')}
+          resizeMode="contain"
+        />
+      </View>
+    </TouchableOpacity>
+  ),
+});
 
 
 GoalsScreen.propTypes = propTypes;

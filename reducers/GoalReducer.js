@@ -15,7 +15,7 @@ export default (state = initialState, action) => {
       return action.payload;
     }
     case CLEAR_GOAL: {
-      return null;
+      return initialState;
     }
     default:
       return state;
