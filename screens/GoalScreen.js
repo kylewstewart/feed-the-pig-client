@@ -46,6 +46,7 @@ class GoalScreen extends Component {
     switch (field) {
       case 'saved':
       case 'amount': {
+        if (input === '$0.0') return '';
         const digitsOnly = input.replace(/[^\d]/g, '');
         const numWithDecimals = (Number(digitsOnly) / 100).toFixed(2);
         const split = numWithDecimals.split('.');
@@ -170,6 +171,7 @@ class GoalScreen extends Component {
 GoalScreen.navigationOptions = ({ navigation }) => ({
   title: `${navigation.state.params.header}`,
   tabBarVisible: false,
+  headerTitleStyle: styles.headerTitle,
 });
 
 GoalScreen.propTypes = propTypes;

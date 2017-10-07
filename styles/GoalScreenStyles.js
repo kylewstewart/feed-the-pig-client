@@ -24,7 +24,6 @@ const GoalScreenStyles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
   buttonContainer: {
     flex: 1,
@@ -42,14 +41,14 @@ const GoalScreenStyles = StyleSheet.create({
     borderWidth: 0,
     fontSize: 16,
     width: '40%',
-    textAlign: 'center',
+    textAlign: 'right',
   },
   dateField: {
     width: '40%',
   },
   dateText: {
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'right',
   },
   submitButton: {
     borderWidth: 1,
