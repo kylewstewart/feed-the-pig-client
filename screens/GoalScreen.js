@@ -25,8 +25,7 @@ class GoalScreen extends Component {
 
   onSubmit = () => {
     const { id, name, amount, date, saved, rate } = this.state;
-    const goal = { id, name, amount, date, saved, rate };
-    this.props.submitGoal(goal);
+    this.props.submitGoal(id, name, amount, date, saved, rate);
   };
 
   onReset = () => this.setPropsToState();
@@ -42,7 +41,6 @@ class GoalScreen extends Component {
     const { id, name, amount, date, saved, rate } = this.props.goal;
     this.setState({ id, name, amount, date, saved, rate });
   };
-
 
   formatedInput = ({ field, input }) => {
     switch (field) {

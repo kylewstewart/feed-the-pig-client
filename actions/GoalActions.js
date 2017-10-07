@@ -13,7 +13,9 @@ export const fetchGoals = () => async (dispatch) => {
 export const setGoal = (id, goals) => (dispatch) => {
   const goal = goals.find(g => g.id === id);
   dispatch({ type: types.SET_GOAL, payload: goal });
-  dispatch(NavigationActions.navigate({ routeName: 'goal', params: { header: goal.name } }));
+  const routeName = 'goal';
+  const header = goal.name;
+  dispatch(NavigationActions.navigate({ routeName, params: { header } }));
 };
 
 export const addNew = () => (dispatch) => {
@@ -23,9 +25,16 @@ export const addNew = () => (dispatch) => {
   dispatch(NavigationActions.navigate({ routeName, params: { header } }));
 };
 
-export const submitGoal = goal => async (dispatch) => {
+export const submitGoal = (id, name, amount, date, saved, rate) => async (dispatch) => {
   const token = await AsyncStorage.getItem('token');
-  if (!goal.id) {
+  const goal = {
+    name,
+    date,
+    amount: (amount.replace(/[^\d]/g, '') / 100).toFixed(2),
+    saved: (saved.replace(/[^\d]/g, '') / 100).toFixed(2),
+    rate: (rate.replace(/[^\d]/g, '') / 10000).toFixed(2),
+  };
+  if (!id) {
     const savedGoal = await adaptors.createGoal(token, goal);
     dispatch({ type: types.ADD_GOAL, payload: savedGoal });
     dispatch(NavigationActions.navigate({ routeName: 'goals' }));

@@ -15,6 +15,9 @@ const styles = StyleSheet.create({
     color: '#005A9C',
     fontWeight: '500',
   },
+  header: {
+    paddingHorizontal: 10,
+  },
   image: {
     height: 35,
     width: 35,

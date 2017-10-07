@@ -49,6 +49,7 @@ class GoalsScreen extends Component {
 GoalsScreen.navigationOptions = ({ navigation }) => ({
   title: 'Your Pigs',
   headerTitleStyle: styles.headerTitle,
+  headerStyle: styles.header,
   headerLeft: null,
   headerRight: (
     <TouchableOpacity onPress={() => navigation.state.params.addNew()}>
