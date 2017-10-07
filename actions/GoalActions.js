@@ -21,7 +21,7 @@ export const setGoal = (id, goals) => (dispatch) => {
 
 export const addNew = () => (dispatch) => {
   dispatch(NavigationActions.navigate({ routeName: 'goal' }));
-}
+};
 
 export const submitGoal = goal => async (dispatch) => {
   const token = await AsyncStorage.getItem('token');
