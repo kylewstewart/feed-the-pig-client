@@ -7,6 +7,9 @@ import styles from '../styles/GoalScreenStyles';
 import { submitGoal } from '../actions';
 
 const propTypes = {
+  navigation: PropTypes.shape({
+    setParams: PropTypes.func.isRequired,
+  }).isRequired,
   goal: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -21,9 +24,12 @@ const propTypes = {
 class GoalScreen extends Component {
   state = { showSubmit: true, showDatePicker: false }
 
-  componentWillMount = () => this.setPropsToState();
+  componentWillMount = () => {
+    this.setPropsToState();
+    this.props.navigation.setParams({ submitGoal: this.save });
+  }
 
-  onSubmit = () => {
+  save = () => {
     const { id, name, amount, date, saved, rate } = this.state;
     this.props.submitGoal(id, name, amount, date, saved, rate);
   };
@@ -110,7 +116,7 @@ class GoalScreen extends Component {
             />
           </View>
           <View style={styles.inputContainer}>
-            <Text style={styles.text}> Est. Return </Text>
+            <Text style={styles.text}> Rate </Text>
             <TextInput
               placeholder="X.XX%"
               keyboardType="numeric"
@@ -172,6 +178,12 @@ GoalScreen.navigationOptions = ({ navigation }) => ({
   title: `${navigation.state.params.header}`,
   tabBarVisible: false,
   headerTitleStyle: styles.headerTitle,
+  headerStyle: styles.header,
+  headerRight: (
+    <TouchableOpacity onPress={() => navigation.state.params.submitGoal()}>
+      <Text style={styles.headerRightText}> Save </Text>
+    </TouchableOpacity>
+  ),
 });
 
 GoalScreen.propTypes = propTypes;

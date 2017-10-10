@@ -9,7 +9,7 @@ const GoalScreenStyles = StyleSheet.create({
   goalContainer: {
     flex: 5,
     justifyContent: 'space-around',
-    alignItems: 'center',
+    paddingHorizontal: '5%',
   },
   submitContainer: {
     flex: 1,
@@ -33,22 +33,22 @@ const GoalScreenStyles = StyleSheet.create({
     fontSize: 16,
     color: '#005A9C',
     fontWeight: '700',
-    width: '40%',
+    width: '30%',
     textAlign: 'left',
   },
   inputField: {
     borderColor: 'gray',
     borderWidth: 0,
     fontSize: 16,
-    width: '40%',
-    textAlign: 'right',
+    width: '50%',
+    textAlign: 'left',
   },
   dateField: {
-    width: '40%',
+    width: '50%',
   },
   dateText: {
     fontSize: 16,
-    textAlign: 'right',
+    textAlign: 'left',
   },
   submitButton: {
     borderWidth: 1,
@@ -61,9 +61,18 @@ const GoalScreenStyles = StyleSheet.create({
     color: 'white',
     fontWeight: '600',
   },
+  header: {
+    paddingHorizontal: 10,
+  },
   headerTitle: {
     fontFamily: 'Avenir Next',
     fontSize: 20,
+    color: '#005A9C',
+    fontWeight: '500',
+  },
+  headerRightText: {
+    fontFamily: 'Avenir Next',
+    fontSize: 16,
     color: '#005A9C',
     fontWeight: '500',
   },

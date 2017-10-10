@@ -1,6 +1,6 @@
-import ip from 'ip';
 
-const baseURL = 'http://localhost:3000/api/v1';
+// const baseURL = 'http://localhost:3000/api/v1';
+const baseURL = 'https://dgmvlktrln.localtunnel.me/api/v1';
 
 export const getCode = mobile => (
   fetch(`${baseURL}/users`, {
