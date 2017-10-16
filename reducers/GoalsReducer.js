@@ -1,4 +1,4 @@
-import { SET_GOALS, CLEAR_GOALS, ADD_GOAL, EDIT_GOAL, DELETE_GOAL } from '../actions/types';
+import { SET_GOALS, CLEAR_GOALS, ADD_GOAL, UPDATE_GOAL, DELETE_GOAL } from '../actions/types';
 
 const initialState = [{
   id: 0,
@@ -24,8 +24,12 @@ export default (state = initialState, action) => {
     case ADD_GOAL: {
       return [...state, action.payload];
     }
-    case EDIT_GOAL: {
-      return state;
+    case UPDATE_GOAL: {
+      return state.map(goal => (
+        goal.id === action.id ?
+        action.payload :
+        goal
+      ));
     }
     case DELETE_GOAL: {
       return state;

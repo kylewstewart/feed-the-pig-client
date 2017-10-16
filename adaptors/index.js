@@ -55,3 +55,14 @@ export const createGoal = (token, goal) => (
     body: JSON.stringify(goal),
   }).then(response => response.json())
 );
+export const updateGoal = (token, goal, id) => (
+  fetch(`${baseURL}/goals/${id}`, {
+    method: 'put',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `${token}`,
+    },
+    body: JSON.stringify(goal),
+  }).then(response => response.json())
+);

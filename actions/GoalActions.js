@@ -38,5 +38,8 @@ export const submitGoal = (id, name, amount, date, saved, rate) => async (dispat
     const savedGoal = await adaptors.createGoal(token, goal);
     dispatch({ type: types.ADD_GOAL, payload: savedGoal });
     dispatch(NavigationActions.navigate({ routeName: 'goals' }));
+  } else {
+    const updatedGoal = await adaptors.updateGoal(token, goal, id);
+    dispatch({ type: types.UPDATE_GOAL, payload: updatedGoal, id });
   }
 };

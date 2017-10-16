@@ -23,7 +23,7 @@ export const CLEAR_ERROR = 'clear_error';
 
 export const SET_GOALS = 'set_goals';
 export const ADD_GOAL = 'add_goal';
-export const EDIT_GOAL = 'edit_goal';
+export const UPDATE_GOAL = 'update_goal';
 export const DELETE_GOAL = 'delete_goal';
 export const CLEAR_GOALS = 'clear_goals';
 
