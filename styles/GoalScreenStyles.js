@@ -37,10 +37,11 @@ const GoalScreenStyles = StyleSheet.create({
     textAlign: 'left',
   },
   inputField: {
-    borderColor: 'gray',
+    borderBottomColor: 'gainsboro',
+    borderBottomWidth: 1,
     borderWidth: 0,
     fontSize: 16,
-    width: '50%',
+    width: '70%',
     textAlign: 'left',
   },
   dateField: {
@@ -50,13 +51,19 @@ const GoalScreenStyles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'left',
   },
-  submitButton: {
+  resetButton: {
     borderWidth: 1,
     backgroundColor: '#005A9C',
     borderRadius: 5,
     padding: 10,
   },
-  submitButtonText: {
+  deleteButton: {
+    borderWidth: 1,
+    backgroundColor: 'crimson',
+    borderRadius: 5,
+    padding: 10,
+  },
+  buttonText: {
     fontSize: 15,
     color: 'white',
     fontWeight: '600',

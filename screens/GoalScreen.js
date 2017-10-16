@@ -22,17 +22,12 @@ const propTypes = {
 };
 
 class GoalScreen extends Component {
-  state = { showSubmit: true, showDatePicker: false }
+  state = { showButtons: true, showDatePicker: false }
 
   componentWillMount = () => {
     this.setPropsToState();
     this.props.navigation.setParams({ submitGoal: this.save });
   }
-
-  save = () => {
-    const { id, name, amount, date, saved, rate } = this.state;
-    this.props.submitGoal(id, name, amount, date, saved, rate);
-  };
 
   onReset = () => this.setPropsToState();
 
@@ -40,12 +35,17 @@ class GoalScreen extends Component {
 
   onDatePress = () => this.setState(prevState => ({
     showDatePicker: !prevState.showDatePicker,
-    showSubmit: !!prevState.showDatePicker,
+    showButtons: !!prevState.showDatePicker,
   }));
 
   setPropsToState = () => {
     const { id, name, amount, date, saved, rate } = this.props.goal;
     this.setState({ id, name, amount, date, saved, rate });
+  };
+
+  save = () => {
+    const { id, name, amount, date, saved, rate } = this.state;
+    this.props.submitGoal(id, name, amount, date, saved, rate);
   };
 
   formatedInput = ({ field, input }) => {
@@ -70,7 +70,7 @@ class GoalScreen extends Component {
   }
 
   render() {
-    const { name, amount, date, saved, rate, showDatePicker, showSubmit } = this.state;
+    const { name, amount, date, saved, rate, showDatePicker, showButtons } = this.state;
 
     return (
       <View style={styles.screenContainer}>
@@ -128,29 +128,27 @@ class GoalScreen extends Component {
           </View>
         </View>
 
-        {showSubmit ?
+        {showButtons ?
           <View style={styles.submitContainer}>
-            <TouchableOpacity onPress={this.onSubmit} style={styles.submitButton}>
-              <Text style={styles.submitButtonText}>
-                submit
+            <TouchableOpacity onPress={this.onReset} style={styles.resetButton}>
+              <Text style={styles.buttonText}>
+                Reset Form
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={this.onReset} style={styles.submitButton}>
-              <Text style={styles.submitButtonText}>
-                reset
+            <TouchableOpacity onPress={this.onDelete} style={styles.deleteButton}>
+              <Text style={styles.buttonText}>
+                Delete Pig
               </Text>
             </TouchableOpacity>
           </View> :
+
           <View style={styles.submitContainer} />
         }
 
+
         <View style={styles.keyboardSpacer} />
 
-        <Modal
-          animationType="slide"
-          visible={showDatePicker}
-          transparent
-        >
+        <Modal animationType="slide" visible={showDatePicker} transparent>
           <View style={styles.modalContainer}>
             <View style={styles.modalSpacer} />
             <View style={styles.dateButtonContainer}>
