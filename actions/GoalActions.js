@@ -41,5 +41,6 @@ export const submitGoal = (id, name, amount, date, saved, rate) => async (dispat
   } else {
     const updatedGoal = await adaptors.updateGoal(token, goal, id);
     dispatch({ type: types.UPDATE_GOAL, payload: updatedGoal, id });
+    dispatch(NavigationActions.navigate({ routeName: 'goals' }));
   }
 };
