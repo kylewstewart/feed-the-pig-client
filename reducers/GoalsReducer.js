@@ -22,12 +22,14 @@ export default (state = initialState, action) => {
       return null;
     }
     case ADD_GOAL: {
-      return [...state, action.payload];
+      const { id, name, amount, saved, date, rate } = action.payload;
+      return [...state, { id, name, amount, saved, date: new Date(date), rate }];
     }
     case UPDATE_GOAL: {
+      const { id, name, amount, saved, date, rate } = action.payload;
       return state.map(goal => (
         goal.id === action.id ?
-        action.payload :
+        { id, name, amount, saved, date: new Date(date), rate } :
         goal
       ));
     }
