@@ -29,8 +29,6 @@ class GoalScreen extends Component {
     this.props.navigation.setParams({ submitGoal: this.save });
   }
 
-  onReset = () => this.setPropsToState();
-
   onChange = text => this.setState({ [text.field]: this.formatedInput(text) });
 
   onDatePress = () => this.setState(prevState => ({
@@ -42,6 +40,8 @@ class GoalScreen extends Component {
     const { id, name, amount, date, saved, rate } = this.props.goal;
     this.setState({ id, name, amount, date, saved, rate });
   };
+
+  reset = () => this.setPropsToState();
 
   save = () => {
     const { id, name, amount, date, saved, rate } = this.state;
@@ -130,7 +130,7 @@ class GoalScreen extends Component {
 
         {showButtons ?
           <View style={styles.submitContainer}>
-            <TouchableOpacity onPress={this.onReset} style={styles.resetButton}>
+            <TouchableOpacity onPress={this.reset} style={styles.resetButton}>
               <Text style={styles.buttonText}>
                 Reset Form
               </Text>
