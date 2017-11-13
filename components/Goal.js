@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 
-import styles from '../styles/GoalStyles';
 
 class Goal extends Component {
 
@@ -12,7 +11,7 @@ class Goal extends Component {
         <TextInput
           placeholder="Piggy Name"
           style={styles.inputField}
-          />
+        />
       </View>
     </View>
   );
