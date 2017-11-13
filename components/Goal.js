@@ -12,7 +12,6 @@ class Goal extends Component {
         <TextInput
           placeholder="Piggy Name"
           style={styles.inputField}
-          onChangedText={}
           />
       </View>
     </View>
